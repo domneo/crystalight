@@ -1,0 +1,26 @@
+---
+import { getMedia } from "../services/wpService";
+
+interface Props {
+  title: string;
+  description?: string;
+  fileId: number;
+  imageId: number;
+}
+const { title, description, fileId, imageId } = Astro.props;
+
+const image: string = (await getMedia(imageId)).source_url;
+const file: string = (await getMedia(fileId)).source_url;
+---
+
+<div class="w-full max-w-sm mx-auto overflow-hidden rounded-md shadow-md">
+  <div
+    class="flex items-end justify-end w-full h-56 bg-cover"
+    style=`background-image: url('${image}');`
+  >
+  </div>
+  <div class="px-5 py-3">
+    <h3 class="text-gray-700 uppercase">{title}</h3>
+    {description && <span class="mt-2 text-gray-500">{description}</span>}
+  </div>
+</div>
