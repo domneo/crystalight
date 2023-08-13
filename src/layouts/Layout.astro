@@ -1,4 +1,7 @@
 ---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
 interface Props {
   title: string;
 }
@@ -17,7 +20,25 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
-    <slot />
+    <div class="w-full bg-slate-100">
+      <Header
+        navigation={[
+          { label: "Home", href: "/" },
+          { label: "Products", href: "#products" },
+          { label: "Logo Imprints", href: "/logo-imprints" },
+          { label: "Contact", href: "/contact" },
+          { label: "About", href: "/about" },
+        ]}
+      />
+
+      <main class="my-8">
+        <div class="container px-6 mx-auto">
+          <slot />
+        </div>
+      </main>
+
+      <Footer />
+    </div>
   </body>
 </html>
 <style is:global>
