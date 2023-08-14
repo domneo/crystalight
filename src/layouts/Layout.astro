@@ -4,9 +4,10 @@ import Footer from "../components/Footer.astro";
 
 interface Props {
   title: string;
+  currentPage: string;
 }
 
-const { title } = Astro.props;
+const { title, currentPage } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -20,14 +21,39 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
-    <div class="w-full bg-slate-100">
+    <div class="w-full bg-base-100">
       <Header
         navigation={[
-          { label: "Home", href: "/" },
-          { label: "Products", href: "#products" },
-          { label: "Logo Imprints", href: "/logo-imprints" },
-          { label: "Contact", href: "/contact" },
-          { label: "About", href: "/about" },
+          {
+            label: "Home",
+            href: "/",
+            icon: "store",
+            isCurrent: currentPage === "home",
+          },
+          {
+            label: "Products",
+            href: "#products",
+            icon: "gem",
+            isCurrent: currentPage === "products",
+          },
+          {
+            label: "Logo Imprints",
+            href: "/logo-imprints",
+            icon: "stamp",
+            isCurrent: currentPage === "logo-imprints",
+          },
+          {
+            label: "Contact",
+            href: "/contact",
+            icon: "phone",
+            isCurrent: currentPage === "contact",
+          },
+          {
+            label: "About",
+            href: "/about",
+            icon: "info",
+            isCurrent: currentPage === "about",
+          },
         ]}
       />
 

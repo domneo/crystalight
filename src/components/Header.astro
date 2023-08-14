@@ -2,6 +2,8 @@
 interface NavItem {
   label: string;
   href: string;
+  icon: string;
+  isCurrent: boolean;
 }
 interface Props {
   navigation: NavItem[];
@@ -11,31 +13,76 @@ const { navigation } = Astro.props;
 ---
 
 <header>
-  <div class="container px-6 py-3 mx-auto">
-    <div class="flex items-center justify-between">
-      <div class="hidden w-full text-gray-600 md:flex md:items-center"></div>
-      <div
-        class="w-full py-5 text-2xl font-semibold text-gray-700 md:text-center"
-      >
-        <img
-          src="https://www.crystalight.com.sg/wp-content/themes/Crystalight/img/logo.png"
-        />
-      </div>
-      <div class="flex items-center justify-end w-full"></div>
+  <div class="container px-6 py-4 mx-auto">
+    <div class="flex items-center justify-center pt-4 pb-6">
+      <img
+        src="logo.svg"
+        width="484"
+        height="83"
+        class="w-full"
+        style="max-width: 400px;"
+      />
     </div>
-    <nav class="mt-4 sm:flex sm:justify-center sm:items-center">
-      <div class="flex flex-col sm:flex-row">
-        {
-          navigation.map((nav) => (
-            <a
-              class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0"
-              href={nav.href}
-            >
-              {nav.label}
-            </a>
-          ))
-        }
+    <nav class="flex justify-center items-center">
+      <div class="w-full flex flex-col sm:items-center">
+        <div class="sm:hidden">
+          <button
+            id="menuOpen"
+            class="w-full btn btn-ghost bg-base-200 rounded-box"
+          >
+            Menu
+            <img src="icon-chevron-down-dark.svg" width="20px" height="20px" />
+          </button>
+          <button
+            id="menuClose"
+            class="w-full btn btn-ghost bg-base-200 rounded-box hidden"
+          >
+            Close
+            <img src="icon-chevron-up-dark.svg" width="20px" height="20px" />
+          </button>
+        </div>
+        <ul
+          id="menu"
+          class="menu sm:menu-horizontal bg-base-200 rounded-box drop-shadow-xl gap-1 mt-14 sm:mt-0 absolute inset-x-5 sm:relative sm:inset-x-0 hidden"
+        >
+          {
+            navigation.map((nav) => (
+              <li>
+                <a href={nav.href} class={nav.isCurrent ? "active" : null}>
+                  <img
+                    src={`icon-${nav.icon}-${
+                      nav.isCurrent ? "light" : "dark"
+                    }.svg`}
+                    width="20px"
+                    height="20px"
+                  />
+                  {nav.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
       </div>
     </nav>
   </div>
 </header>
+
+<script async>
+const menuEl = document.getElementById("menu");
+const menuOpenEl = document.getElementById("menuOpen");
+const menuCloseEl = document.getElementById("menuClose");
+
+const onMenuOpenClick = () => {
+  menuEl?.classList.remove("hidden");
+  menuOpenEl?.classList.add("hidden");
+  menuCloseEl?.classList.remove("hidden");
+};
+const onMenuCloseClick = () => {
+  menuEl?.classList.add("hidden");
+  menuOpenEl?.classList.remove("hidden");
+  menuCloseEl?.classList.add("hidden");
+};
+
+menuOpenEl?.addEventListener("click", onMenuOpenClick);
+menuCloseEl?.addEventListener("click", onMenuCloseClick);
+</script>
