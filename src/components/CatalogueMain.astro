@@ -20,33 +20,42 @@ const {
 
 const image: string = (await getMedia(imageId)).source_url;
 const file: string = (await getMedia(fileId)).source_url;
+
+const cardBodyWidths = size === "sm" ? "xl:w-2/3" : "md:w-2/3";
+const cardBodyPadding = size === "sm" ? "py-12" : "py-12 lg:px-14";
 ---
 
-<div
-  class="h-64 overflow-hidden bg-center bg-cover rounded-md"
-  style=`background-image: url('${image}');`
->
-  <div class="flex items-center h-full bg-gray-900 bg-opacity-50">
-    <div class="max-w-xl px-10">
-      <h2 class="text-2xl font-semibold text-white">{title}</h2>
-      {description && <p class="mt-2 text-gray-400">{description}</p>}
-      <a
-        href={file}
-        class="flex items-center px-3 py-2 mt-4 text-sm font-medium text-white uppercase bg-blue-600 rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
-      >
-        <span>{buttonText}</span>
-        <svg
-          class="w-5 h-5 mx-2"
-          fill="none"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-        </svg>
+<div class={`card-${size} card bg-base-100 shadow-xl image-full`}>
+  <figure>
+    <img src={image} alt={title} />
+  </figure>
+  <div
+    class={`card-body justify-center rounded-l-2xl bg-gradient-to-r from-accent-content ${cardBodyWidths} ${cardBodyPadding}`}
+  >
+    <h2 class="card-title text-2xl">{title}</h2>
+    {description && <p class="grow-0">{description}</p>}
+    <div class="card-actions mt-4">
+      <a href={file} target="_blank" class="btn btn-primary">
+        {buttonText}
+        <img src="icon-arrow-right-light.svg" width="20px" height="20px" />
       </a>
     </div>
   </div>
 </div>
+
+<style>
+  .card-sm,
+  .card-lg {
+    width: 100%;
+  }
+  @media (min-width: 768px) {
+    .card-sm {
+      width: calc(50% - 8px);
+    }
+  }
+  @media (min-width: 1024px) {
+    .card-sm {
+      width: calc(50% - 16px);
+    }
+  }
+</style>

@@ -10,7 +10,9 @@ const smallCatalogues = await getSmallCatalogues();
 
 <Layout currentPage="home">
   <main class="my-8">
-    <div class="container px-6 mx-auto">
+    <div
+      class="container flex flex-wrap justify-between gap-4 lg:gap-8 mx-auto"
+    >
       {
         mainCatalogues.map((catalogue) => (
           <CatalogueMain
