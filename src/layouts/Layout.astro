@@ -3,66 +3,70 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
 interface Props {
-  title: string;
+  title?: string;
   currentPage: string;
 }
 
 const { title, currentPage } = Astro.props;
+
+const titleFull = `${title ? title + " | " : ""}Crystalight Printcraft`;
+const description = "Calendars, Diaries, and Corporate Gifts";
+const keywords =
+  "advertising promotional gifts, corporate gifts, door gifts, custom-made products, product launch, opening gift, dinner and dance, family day, wines sets, desktop gifts, bags, sports bags, shoe bags, document bags, mug, cap, t-shirt, windbreaker, jacket, pen, watches, high quality leather products, premium gifts, promotion items, stockist, calendar manufacturer, diary manufacturer, premium gift industry, corporate promotions, corporate functions, bags, cap, T-shirit, desktop stationary, office stationary, electronic goods, fancy gifts, gift set, golf related, household products, IT - related products, leather goods, portfolio organiser, sports, leisure, clocks, wine accessories, writing instrument";
+
+const headerNavigation = [
+  {
+    label: "Home",
+    href: "/",
+    icon: "store",
+    isCurrent: currentPage === "home",
+  },
+  {
+    label: "Products",
+    href: "#products",
+    icon: "gem",
+    isCurrent: currentPage === "products",
+  },
+  {
+    label: "Logo Imprints",
+    href: "/logo-imprints",
+    icon: "stamp",
+    isCurrent: currentPage === "logo-imprints",
+  },
+  {
+    label: "Contact",
+    href: "/contact",
+    icon: "phone",
+    isCurrent: currentPage === "contact",
+  },
+  {
+    label: "About",
+    href: "/about",
+    icon: "info",
+    isCurrent: currentPage === "about",
+  },
+];
 ---
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Astro description" />
+    <meta name="description" content={description} />
+    <meta name="Keywords" content={keywords} />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    <title>{titleFull}</title>
   </head>
   <body>
     <div class="w-full bg-base-100">
-      <Header
-        navigation={[
-          {
-            label: "Home",
-            href: "/",
-            icon: "store",
-            isCurrent: currentPage === "home",
-          },
-          {
-            label: "Products",
-            href: "#products",
-            icon: "gem",
-            isCurrent: currentPage === "products",
-          },
-          {
-            label: "Logo Imprints",
-            href: "/logo-imprints",
-            icon: "stamp",
-            isCurrent: currentPage === "logo-imprints",
-          },
-          {
-            label: "Contact",
-            href: "/contact",
-            icon: "phone",
-            isCurrent: currentPage === "contact",
-          },
-          {
-            label: "About",
-            href: "/about",
-            icon: "info",
-            isCurrent: currentPage === "about",
-          },
-        ]}
-      />
-
+      <Header navigation={headerNavigation} />
       <main class="my-8">
         <div class="container px-6 mx-auto">
           <slot />
         </div>
       </main>
-
       <Footer />
     </div>
   </body>
