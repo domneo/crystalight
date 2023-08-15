@@ -1,8 +1,35 @@
-<footer class="bg-gray-200">
-  <div class="container flex items-center justify-between px-6 py-3 mx-auto">
-    <a href="/" class="text-xl font-bold text-gray-500 hover:text-gray-400"
-      >Crystalight Printcraft</a
-    >
-    <p class="py-2 text-gray-500 sm:py-0">All rights reserved</p>
+---
+const year = new Date().getFullYear();
+const company = "Crystalight Printcraft";
+const address = "Blk 13 Lor 8 Toa Payoh #05-08 Braddell Tech Singapore 319261";
+const telephone = "+65 6251 5313";
+const fax = "+65 6254 5313";
+const email = "enquiry@crystalight.com.sg";
+---
+
+<footer class="footer px-10 py-6 bg-base-content text-base-100">
+  <div class="items-center grid-flow-col gap-3">
+    <img src="logo-icon-white.svg" width="40px" height="40px" />
+    <p>
+      <span class="inline-block">© {year} {company}.</span>
+      <span class="inline-block">All Rights Reserved.</span>
+    </p>
+  </div>
+  <div class="md:place-self-center md:justify-self-end">
+    <div class="grid grid-flow-col gap-4">
+      <p class="md:text-right">
+        <span class="inline-block">{address}</span>
+        <br />
+        <span class="inline-block">
+          Tel: <a href={`tel:${telephone}`} class="underline">{telephone}</a>
+        </span>
+        <span> •</span>
+        <span class="inline-block">Fax: {fax}</span>
+        <span> •</span>
+        <span class="inline-block">
+          Email: <a href={`mailto:${email}`} class="underline">{email}</a>
+        </span>
+      </p>
+    </div>
   </div>
 </footer>
