@@ -23,6 +23,10 @@ const file: string = (await getMedia(fileId)).source_url;
 
 const cardBodyWidths = size === "sm" ? "xl:w-2/3" : "md:w-2/3";
 const cardBodyPadding = size === "sm" ? "py-12" : "py-12 lg:px-14";
+const cardTitleSize =
+  size === "sm"
+    ? "text-2xl xl:text-3xl"
+    : "text-2xl lg:text-4xl 2xl:text-5xl 2xl:mb-3";
 ---
 
 <div class={`card-${size} card bg-base-100 shadow-xl image-full`}>
@@ -32,7 +36,7 @@ const cardBodyPadding = size === "sm" ? "py-12" : "py-12 lg:px-14";
   <div
     class={`card-body justify-center rounded-l-2xl bg-gradient-to-r from-accent-content ${cardBodyWidths} ${cardBodyPadding}`}
   >
-    <h2 class="card-title text-2xl">{title}</h2>
+    <h2 class={`card-title ${cardTitleSize}`}>{title}</h2>
     {description && <p class="grow-0">{description}</p>}
     <div class="card-actions mt-4">
       <a href={file} target="_blank" class="btn btn-primary">

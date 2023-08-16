@@ -27,21 +27,24 @@ const smallCatalogues = await getSmallCatalogues();
           />
         ))
       }
-      <div class="mt-16">
-        <div
-          class="grid grid-cols-1 gap-6 mt-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-        >
-          {
-            smallCatalogues.map((catalogue) => (
-              <CatalogueSmall
-                title={catalogue.title.rendered}
-                description={catalogue.acf.description}
-                fileId={catalogue.acf.file}
-                imageId={catalogue.acf.image}
-              />
-            ))
-          }
-        </div>
+      <h2
+        class="w-full text-2xl lg:text-3xl text-center sm:text-left font-semibold mt-12"
+      >
+        Explore our full range
+      </h2>
+      <div
+        class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-12"
+      >
+        {
+          smallCatalogues.map((catalogue) => (
+            <CatalogueSmall
+              title={catalogue.title.rendered}
+              description={catalogue.acf.description}
+              fileId={catalogue.acf.file}
+              imageId={catalogue.acf.image}
+            />
+          ))
+        }
       </div>
     </div>
   </main>

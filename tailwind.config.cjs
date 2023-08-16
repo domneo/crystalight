@@ -9,8 +9,8 @@ module.exports = {
     themes: [
       {
         crystalight: {
-          primary: "#641B19",
-          secondary: "#C83631",
+          primary: "#C83631",
+          secondary: "#641B19",
           accent: "#1CC7B8",
           neutral: "#926863",
           "base-100": "#f2f2f2",

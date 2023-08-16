@@ -13,14 +13,17 @@ const image: string = (await getMedia(imageId)).source_url;
 const file: string = (await getMedia(fileId)).source_url;
 ---
 
-<div class="w-full max-w-sm mx-auto overflow-hidden rounded-md shadow-md">
-  <div
-    class="flex items-end justify-end w-full h-56 bg-cover"
-    style=`background-image: url('${image}');`
-  >
+<a
+  href={file}
+  title={title}
+  target="_blank"
+  class="card card-compact bg-neutral-content text-center w-full max-w-sm mx-auto hover:-translate-y-2 hover:shadow-2xl transition-all"
+>
+  <figure class="h-56">
+    <img src={image} alt={title} class="w-full object-cover" />
+  </figure>
+  <div class="card-body">
+    <h2 class="card-title justify-center">{title}</h2>
+    {description && <p>{description}</p>}
   </div>
-  <div class="px-5 py-3">
-    <h3 class="text-gray-700 uppercase">{title}</h3>
-    {description && <span class="mt-2 text-gray-500">{description}</span>}
-  </div>
-</div>
+</a>

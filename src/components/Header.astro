@@ -48,7 +48,10 @@ const { navigation } = Astro.props;
           {
             navigation.map((nav) => (
               <li>
-                <a href={nav.href} class={nav.isCurrent ? "active" : null}>
+                <a
+                  href={nav.href}
+                  class={`gap-1 px-3.5 ${nav.isCurrent ? "active" : null}`}
+                >
                   <img
                     src={`icon-${nav.icon}-${
                       nav.isCurrent ? "light" : "dark"
