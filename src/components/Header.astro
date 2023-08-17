@@ -17,13 +17,15 @@ const { navigation } = Astro.props;
     class="container flex justify-between items-center gap-6 px-6 py-4 mx-auto"
   >
     <div class="flex items-center justify-center py-4">
-      <img
-        src="logo.svg"
-        width="484"
-        height="83"
-        class="w-full"
-        style="max-width: 400px;"
-      />
+      <a href="/" title="Crystalight Printcraft" class="link rounded-md">
+        <img
+          src="logo.svg"
+          width="484"
+          height="83"
+          class="w-full"
+          style="max-width: 400px;"
+        />
+      </a>
     </div>
     <nav class="flex justify-center items-center shrink-0">
       <div class="w-full flex flex-col z-50">
@@ -76,6 +78,7 @@ const { navigation } = Astro.props;
               <li>
                 <a
                   href={nav.href}
+                  title={nav.label}
                   class={`gap-1 px-3.5 active:bg-base-300 ${
                     nav.isCurrent
                       ? "isCurrent bg-primary hover:bg-primary-focus text-base-100 hover:text-base-100 font-semibold"

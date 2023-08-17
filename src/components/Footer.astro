@@ -21,13 +21,21 @@ const email = "enquiry@crystalight.com.sg";
         <span class="inline-block">{address}</span>
         <br />
         <span class="inline-block">
-          Tel: <a href={`tel:${telephone}`} class="underline">{telephone}</a>
+          Tel: <a
+            href={`tel:${telephone}`}
+            title={telephone}
+            class="link rounded"
+          >
+            {telephone}
+          </a>
         </span>
         <span> •</span>
         <span class="inline-block">Fax: {fax}</span>
         <span> •</span>
         <span class="inline-block">
-          Email: <a href={`mailto:${email}`} class="underline">{email}</a>
+          Email: <a href={`mailto:${email}`} title={email} class="link rounded">
+            {email}
+          </a>
         </span>
       </p>
     </div>
