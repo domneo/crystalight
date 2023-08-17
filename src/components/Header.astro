@@ -13,8 +13,10 @@ const { navigation } = Astro.props;
 ---
 
 <header>
-  <div class="container px-6 py-4 mx-auto">
-    <div class="flex items-center justify-center pt-4 pb-6">
+  <div
+    class="container flex justify-between items-center gap-6 px-6 py-4 mx-auto"
+  >
+    <div class="flex items-center justify-center py-4">
       <img
         src="logo.svg"
         width="484"
@@ -23,34 +25,62 @@ const { navigation } = Astro.props;
         style="max-width: 400px;"
       />
     </div>
-    <nav class="flex justify-center items-center">
-      <div class="w-full flex flex-col sm:items-center z-50">
-        <div class="sm:hidden">
+    <nav class="flex justify-center items-center shrink-0">
+      <div class="w-full flex flex-col z-50">
+        <div class="lg:hidden">
           <button
             id="menuOpen"
-            class="w-full btn btn-ghost bg-base-200 rounded-box"
+            class="w-full btn btn-outline rounded-box tracking-wider"
           >
             Menu
-            <img src="icon-chevron-down-dark.svg" width="20px" height="20px" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-chevron-down"
+              ><path d="m6 9 6 6 6-6"></path></svg
+            >
           </button>
           <button
             id="menuClose"
-            class="w-full btn btn-ghost bg-base-200 rounded-box hidden"
+            class="w-full btn btn-outline rounded-box tracking-wider hidden"
           >
             Close
-            <img src="icon-chevron-up-dark.svg" width="20px" height="20px" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-chevron-up"
+              ><path d="m18 15-6-6-6 6"></path></svg
+            >
           </button>
         </div>
         <ul
           id="menu"
-          class="menu sm:menu-horizontal bg-base-200 rounded-box drop-shadow-xl gap-1 mt-14 sm:mt-0 absolute inset-x-5 sm:relative sm:inset-x-0 hidden"
+          class="menu bg-neutral-content lg:bg-transparent rounded-box drop-shadow-xl lg:menu-horizontal gap-1 mt-14 lg:mt-0 absolute right-5 left-auto lg:relative lg:inset-x-0 w-60 lg:w-full hidden"
         >
           {
             navigation.map((nav) => (
               <li>
                 <a
                   href={nav.href}
-                  class={`gap-1 px-3.5 ${nav.isCurrent ? "active" : null}`}
+                  class={`gap-1 px-3.5 active:bg-base-300 ${
+                    nav.isCurrent
+                      ? "isCurrent bg-primary hover:bg-primary-focus text-base-100 hover:text-base-100 font-semibold"
+                      : null
+                  }`}
                 >
                   <img
                     src={`icon-${nav.icon}-${
@@ -89,3 +119,15 @@ const onMenuCloseClick = () => {
 menuOpenEl?.addEventListener("click", onMenuOpenClick);
 menuCloseEl?.addEventListener("click", onMenuCloseClick);
 </script>
+
+<style>
+  #menu li a:not(.isCurrent):hover,
+  #menu li a:not(.isCurrent):focus {
+    background-color: hsl(var(--b2) / var(--tw-bg-opacity));
+    color: hsl(var(--bc) / var(--tw-text-opacity));
+  }
+  #menu li a:not(.isCurrent):active {
+    background-color: hsl(var(--b3) / var(--tw-bg-opacity));
+    color: hsl(var(--bc) / var(--tw-text-opacity));
+  }
+</style>

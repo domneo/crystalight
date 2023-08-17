@@ -11,41 +11,37 @@ const smallCatalogues = await getSmallCatalogues();
 ---
 
 <Layout currentPage="home">
-  <main class="my-8">
+  <div class="container flex flex-wrap justify-between gap-4 lg:gap-8 mx-auto">
+    {
+      mainCatalogues.map((catalogue) => (
+        <CatalogueMain
+          title={catalogue.title.rendered}
+          description={catalogue.acf.description}
+          fileId={catalogue.acf.file}
+          imageId={catalogue.acf.image}
+          buttonText={catalogue.acf.buttonText}
+          size={catalogue.acf.size}
+        />
+      ))
+    }
+    <h2
+      class="w-full text-3xl lg:text-4xl text-center sm:text-left font-display mt-12"
+    >
+      Explore our full range
+    </h2>
     <div
-      class="container flex flex-wrap justify-between gap-4 lg:gap-8 mx-auto"
+      class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-12"
     >
       {
-        mainCatalogues.map((catalogue) => (
-          <CatalogueMain
+        smallCatalogues.map((catalogue) => (
+          <CatalogueSmall
             title={catalogue.title.rendered}
             description={catalogue.acf.description}
             fileId={catalogue.acf.file}
             imageId={catalogue.acf.image}
-            buttonText={catalogue.acf.buttonText}
-            size={catalogue.acf.size}
           />
         ))
       }
-      <h2
-        class="w-full text-2xl lg:text-3xl text-center sm:text-left font-semibold mt-12"
-      >
-        Explore our full range
-      </h2>
-      <div
-        class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-12"
-      >
-        {
-          smallCatalogues.map((catalogue) => (
-            <CatalogueSmall
-              title={catalogue.title.rendered}
-              description={catalogue.acf.description}
-              fileId={catalogue.acf.file}
-              imageId={catalogue.acf.image}
-            />
-          ))
-        }
-      </div>
     </div>
-  </main>
+  </div>
 </Layout>

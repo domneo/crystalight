@@ -22,12 +22,6 @@ const headerNavigation = [
     isCurrent: currentPage === "home",
   },
   {
-    label: "Products",
-    href: "#products",
-    icon: "gem",
-    isCurrent: currentPage === "products",
-  },
-  {
     label: "Logo Imprints",
     href: "/logo-imprints",
     icon: "stamp",
@@ -58,11 +52,17 @@ const headerNavigation = [
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{titleFull}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant:wght@500&family=DM+Sans:opsz@9..40&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div class="w-full bg-base-100">
       <Header navigation={headerNavigation} />
-      <main class="my-8">
+      <main class="my-2">
         <div class="container px-6 mx-auto">
           <slot />
         </div>
@@ -75,5 +75,6 @@ const headerNavigation = [
 <style is:global>
   ::selection {
     background-color: hsl(var(--a));
+    color: hsl(var(--ac));
   }
 </style>
