@@ -13,12 +13,25 @@ interface Catalogue {
     buttonText: string;
   };
 }
-export const getMainCatalogues = async (): Promise<Catalogue[]> => {
+
+interface MainCatalogue extends Catalogue {}
+export const getMainCatalogues = async (): Promise<MainCatalogue[]> => {
   return await fetch(`${baseUrl}/catalogue_main`).then((res) => res.json());
 };
 
-export const getSmallCatalogues = async (): Promise<Catalogue[]> => {
+interface SmallCatalogue extends Catalogue {
+  "catalogue-category"?: number[]
+}
+export const getSmallCatalogues = async (): Promise<SmallCatalogue[]> => {
   return await fetch(`${baseUrl}/catalogue_small`).then((res) => res.json());
+};
+
+interface CatalogueCategory {
+  id: number;
+  name: string;
+}
+export const getCatalogueCategories = async (): Promise<CatalogueCategory[]> => {
+  return await fetch(`${baseUrl}/catalogue-category`).then((res) => res.json());
 };
 
 interface Media {

@@ -1,17 +1,24 @@
 ---
 export const prerender = false;
 
-import { getMainCatalogues, getSmallCatalogues } from "../services/wpService";
+import {
+  getCatalogueCategories,
+  getMainCatalogues,
+  getSmallCatalogues,
+} from "../services/wpService";
 import CatalogueMain from "../components/CatalogueMain.astro";
 import Layout from "../layouts/Layout.astro";
 import CatalogueSmall from "../components/CatalogueSmall.astro";
 
 const mainCatalogues = await getMainCatalogues();
 const smallCatalogues = await getSmallCatalogues();
+const catalogueCategories = await getCatalogueCategories();
 ---
 
 <Layout currentPage="home">
-  <div class="container flex flex-wrap justify-between gap-4 lg:gap-8 mx-auto">
+  <div
+    class="container flex flex-wrap justify-between gap-4 lg:gap-8 mx-auto mb-24"
+  >
     {
       mainCatalogues.map((catalogue) => (
         <CatalogueMain
@@ -24,24 +31,31 @@ const smallCatalogues = await getSmallCatalogues();
         />
       ))
     }
-    <h2
-      class="w-full text-3xl lg:text-4xl text-center sm:text-left font-display mt-12 mb-4 lg:mb-0"
-    >
-      Explore our full range
-    </h2>
-    <div
-      class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-12"
-    >
-      {
-        smallCatalogues.map((catalogue) => (
-          <CatalogueSmall
-            title={catalogue.title.rendered}
-            description={catalogue.acf.description}
-            fileId={catalogue.acf.file}
-            imageId={catalogue.acf.image}
-          />
-        ))
-      }
-    </div>
+    {
+      catalogueCategories.map((category) => {
+        const smallCataloguesFiltered = smallCatalogues.filter(
+          (catalogue) => catalogue["catalogue-category"]?.[0] === category.id
+        );
+        if (smallCataloguesFiltered.length > 0) {
+          return (
+            <div class="w-full mt-8">
+              <h2 class="text-3xl lg:text-4xl font-display mb-6">
+                {category.name}
+              </h2>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                {smallCataloguesFiltered.map((catalogue) => (
+                  <CatalogueSmall
+                    title={catalogue.title.rendered}
+                    description={catalogue.acf.description}
+                    fileId={catalogue.acf.file}
+                    imageId={catalogue.acf.image}
+                  />
+                ))}
+              </div>
+            </div>
+          );
+        }
+      })
+    }
   </div>
 </Layout>
