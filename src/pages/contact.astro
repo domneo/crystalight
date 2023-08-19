@@ -3,9 +3,13 @@ import Layout from "../layouts/Layout.astro";
 
 const address =
   "Block 13 Lorong 8 Toa Payoh #05-08 Braddell Tech Singapore 319261";
+const addressLink = "https://goo.gl/maps/eeJd9wb75enDkeha8";
 const telephone = "+65 6251 5313";
+const telephoneLink = `tel:${telephone}`;
 const fax = "+65 6254 5313";
+const faxLink = `tel:${fax}`;
 const email = "enquiry@crystalight.com.sg";
+const emailLink = `mailto:${email}`;
 ---
 
 <Layout currentPage="contact">
@@ -26,7 +30,14 @@ const email = "enquiry@crystalight.com.sg";
                 Address
               </span>
               <br />
-              <span class="font-bold">{address}</span>
+              <a
+                href={addressLink}
+                target="_blank"
+                title={address}
+                class="font-bold link"
+              >
+                {address}
+              </a>
             </p>
           </div>
           <div class="flex items-center gap-4">
@@ -41,7 +52,14 @@ const email = "enquiry@crystalight.com.sg";
                 Email
               </span>
               <br />
-              <span class="font-bold">{email}</span>
+              <a
+                href={emailLink}
+                target="_blank"
+                title={email}
+                class="font-bold link"
+              >
+                {email}
+              </a>
             </p>
           </div>
           <div class="flex items-center gap-4">
@@ -56,7 +74,14 @@ const email = "enquiry@crystalight.com.sg";
                 Telephone
               </span>
               <br />
-              <span class="font-bold">{telephone}</span>
+              <a
+                href={telephoneLink}
+                target="_blank"
+                title={telephone}
+                class="font-bold link"
+              >
+                {telephone}
+              </a>
             </p>
           </div>
           <div class="flex items-center gap-4">
@@ -71,7 +96,14 @@ const email = "enquiry@crystalight.com.sg";
                 Fax
               </span>
               <br />
-              <span class="font-bold">{fax}</span>
+              <a
+                href={faxLink}
+                target="_blank"
+                title={fax}
+                class="font-bold link"
+              >
+                {fax}
+              </a>
             </p>
           </div>
         </div>
