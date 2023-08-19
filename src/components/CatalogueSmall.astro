@@ -17,13 +17,13 @@ const file: string = (await getMedia(fileId)).source_url;
   href={file}
   title={title}
   target="_blank"
-  class="card card-compact bg-neutral-content text-center w-full max-w-sm mx-auto hover:-translate-y-2 hover:shadow-2xl transition-all"
+  class="w-full max-w-sm mx-auto text-center transition-all card card-compact bg-neutral-content hover:-translate-y-2 hover:shadow-2xl"
 >
   <figure class="h-56">
-    <img src={image} alt={title} class="w-full object-cover" />
+    <img src={image} alt={title} class="object-cover w-full" />
   </figure>
   <div class="card-body">
-    <h2 class="card-title justify-center">{title}</h2>
+    <h2 class="justify-center font-semibold card-title">{title}</h2>
     {description && <p>{description}</p>}
   </div>
 </a>

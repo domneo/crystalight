@@ -14,10 +14,10 @@ const { navigation } = Astro.props;
 
 <header>
   <div
-    class="container flex justify-between items-center gap-6 px-6 py-4 mx-auto"
+    class="container flex items-center justify-between gap-6 px-6 py-4 mx-auto"
   >
     <div class="flex items-center justify-center py-4">
-      <a href="/" title="Crystalight Printcraft" class="link rounded-md">
+      <a href="/" title="Crystalight Printcraft" class="rounded-md link">
         <img
           src="logo.svg"
           width="484"
@@ -27,12 +27,12 @@ const { navigation } = Astro.props;
         />
       </a>
     </div>
-    <nav class="flex justify-center items-center shrink-0">
-      <div class="w-full flex flex-col z-50">
+    <nav class="flex items-center justify-center shrink-0">
+      <div class="z-50 flex flex-col w-full">
         <div class="lg:hidden">
           <button
             id="menuOpen"
-            class="w-full btn btn-outline rounded-box tracking-wider"
+            class="w-full tracking-wider btn btn-outline rounded-box"
           >
             Menu
             <svg
@@ -51,7 +51,7 @@ const { navigation } = Astro.props;
           </button>
           <button
             id="menuClose"
-            class="w-full btn btn-outline rounded-box tracking-wider hidden"
+            class="hidden w-full tracking-wider btn btn-outline rounded-box"
           >
             Close
             <svg
@@ -71,7 +71,7 @@ const { navigation } = Astro.props;
         </div>
         <ul
           id="menu"
-          class="menu bg-neutral-content lg:bg-transparent rounded-box drop-shadow-xl lg:menu-horizontal gap-1 mt-14 lg:mt-0 absolute right-5 left-auto lg:relative lg:inset-x-0 w-60 lg:w-full hidden"
+          class="absolute left-auto hidden gap-1 menu bg-neutral-content lg:bg-transparent rounded-box drop-shadow-xl lg:menu-horizontal mt-14 lg:mt-0 right-5 lg:relative lg:inset-x-0 w-60 lg:w-full"
         >
           {
             navigation.map((nav) => (
@@ -81,7 +81,7 @@ const { navigation } = Astro.props;
                   title={nav.label}
                   class={`gap-1 px-3.5 active:bg-base-300 ${
                     nav.isCurrent
-                      ? "isCurrent bg-primary hover:bg-primary-focus text-base-100 hover:text-base-100 font-semibold"
+                      ? "isCurrent bg-primary hover:bg-primary-focus text-base-100 hover:text-base-100"
                       : null
                   }`}
                 >
@@ -125,12 +125,9 @@ menuCloseEl?.addEventListener("click", onMenuCloseClick);
 
 <style>
   #menu li a:not(.isCurrent):hover,
-  #menu li a:not(.isCurrent):focus {
-    background-color: hsl(var(--b2) / var(--tw-bg-opacity));
-    color: hsl(var(--bc) / var(--tw-text-opacity));
-  }
+  #menu li a:not(.isCurrent):focus,
   #menu li a:not(.isCurrent):active {
-    background-color: hsl(var(--b3) / var(--tw-bg-opacity));
+    background-color: hsl(var(--nc) / var(--tw-bg-opacity));
     color: hsl(var(--bc) / var(--tw-text-opacity));
   }
 </style>
