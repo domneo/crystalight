@@ -1,0 +1,58 @@
+---
+const images = [
+  { src: "test.png" },
+  { src: "test.png" },
+  { src: "test.png" },
+  { src: "test.png" },
+  { src: "test.png" },
+  { src: "test.png" },
+  { src: "test.png" },
+  { src: "test.png" },
+  { src: "test.png" },
+  { src: "test.png" },
+];
+---
+
+<div class="flex overflow-hidden">
+  <div class="flex images">
+    {
+      images.map((image) => (
+        <div class="image">
+          <img src={image.src} class="w-full" />
+        </div>
+      ))
+    }
+    {
+      images.map((image) => (
+        <div class="image">
+          <img src={image.src} class="w-full" />
+        </div>
+      ))
+    }
+    {
+      images.map((image) => (
+        <div class="image">
+          <img src={image.src} class="w-full" />
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  @keyframes marquee {
+    from {
+      translate: 0px;
+    }
+    to {
+      translate: calc(10 * -300px);
+    }
+  }
+  .images {
+    animation: marquee 20s linear infinite;
+  }
+  .image {
+    width: 300px;
+    height: 300px;
+  }
+</style>

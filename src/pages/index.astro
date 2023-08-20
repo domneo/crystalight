@@ -14,44 +14,46 @@ const catalogueCategories = await getCatalogueCategories();
 ---
 
 <Layout currentPage="home">
-  <div class="flex flex-wrap justify-between gap-4 lg:gap-8 mx-auto">
+  <div class="container px-6 mx-auto mt-2 mb-24">
+    <div class="flex flex-wrap justify-between gap-4 mx-auto lg:gap-8">
+      {
+        mainCatalogues.map((catalogue) => (
+          <CatalogueMain
+            title={catalogue.title.rendered}
+            description={catalogue.acf.description}
+            fileId={catalogue.acf.file}
+            imageId={catalogue.acf.image}
+            buttonText={catalogue.acf.buttonText}
+            size={catalogue.acf.size}
+          />
+        ))
+      }
+    </div>
     {
-      mainCatalogues.map((catalogue) => (
-        <CatalogueMain
-          title={catalogue.title.rendered}
-          description={catalogue.acf.description}
-          fileId={catalogue.acf.file}
-          imageId={catalogue.acf.image}
-          buttonText={catalogue.acf.buttonText}
-          size={catalogue.acf.size}
-        />
-      ))
+      catalogueCategories.map((category) => {
+        const smallCataloguesFiltered = smallCatalogues.filter(
+          (catalogue) => catalogue["catalogue-category"]?.[0] === category.id
+        );
+        if (smallCataloguesFiltered.length > 0) {
+          return (
+            <div class="w-full mt-16">
+              <h2 class="mb-6 text-3xl lg:text-4xl font-display">
+                {category.name}
+              </h2>
+              <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                {smallCataloguesFiltered.map((catalogue) => (
+                  <CatalogueSmall
+                    title={catalogue.title.rendered}
+                    description={catalogue.acf.description}
+                    fileId={catalogue.acf.file}
+                    imageId={catalogue.acf.image}
+                  />
+                ))}
+              </div>
+            </div>
+          );
+        }
+      })
     }
   </div>
-  {
-    catalogueCategories.map((category) => {
-      const smallCataloguesFiltered = smallCatalogues.filter(
-        (catalogue) => catalogue["catalogue-category"]?.[0] === category.id
-      );
-      if (smallCataloguesFiltered.length > 0) {
-        return (
-          <div class="w-full mt-16">
-            <h2 class="text-3xl lg:text-4xl font-display mb-6">
-              {category.name}
-            </h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-              {smallCataloguesFiltered.map((catalogue) => (
-                <CatalogueSmall
-                  title={catalogue.title.rendered}
-                  description={catalogue.acf.description}
-                  fileId={catalogue.acf.file}
-                  imageId={catalogue.acf.image}
-                />
-              ))}
-            </div>
-          </div>
-        );
-      }
-    })
-  }
 </Layout>
