@@ -7,12 +7,18 @@ const fax = "+65 6254 5313";
 const email = "enquiry@crystalight.com.sg";
 ---
 
-<footer class="footer px-10 py-6 bg-base-content text-base-100">
+<footer class="px-10 py-6 footer bg-base-content text-base-100">
   <div class="items-center grid-flow-col gap-3">
     <img src="logo-icon-white.svg" width="40px" height="40px" />
     <p>
       <span class="inline-block">© {year} {company}.</span>
       <span class="inline-block">All Rights Reserved.</span>
+      <span> •</span>
+      <span class="inline-block">
+        <a href="/disclaimer" title="Disclaimer" class="link text-base-300">
+          Disclaimer
+        </a>
+      </span>
     </p>
   </div>
   <div class="md:place-self-center md:justify-self-end">
@@ -24,7 +30,7 @@ const email = "enquiry@crystalight.com.sg";
           Tel: <a
             href={`tel:${telephone}`}
             title={telephone}
-            class="link rounded"
+            class="rounded link"
           >
             {telephone}
           </a>
@@ -33,7 +39,7 @@ const email = "enquiry@crystalight.com.sg";
         <span class="inline-block">Fax: {fax}</span>
         <span> •</span>
         <span class="inline-block">
-          Email: <a href={`mailto:${email}`} title={email} class="link rounded">
+          Email: <a href={`mailto:${email}`} title={email} class="rounded link">
             {email}
           </a>
         </span>
