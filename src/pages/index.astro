@@ -14,7 +14,9 @@ const catalogueCategories = await getCatalogueCategories();
 ---
 
 <Layout currentPage="home">
-  <div class="container px-6 mx-auto mt-2 mb-24">
+  <div
+    class="container flex flex-col justify-center h-full px-6 pt-2 pb-24 mx-auto"
+  >
     <div class="flex flex-wrap justify-between gap-4 mx-auto lg:gap-8">
       {
         mainCatalogues.map((catalogue) => (

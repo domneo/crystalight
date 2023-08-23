@@ -1,0 +1,66 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const options = [
+  {
+    image: "printing-gold-silver-hotstamp1.jpg",
+    title: "Gold/Silver Hot-Stamping on Foamsheet PVC",
+  },
+  {
+    image: "printing-gold-silver-silkscreen.jpg",
+    title: "Gold/Silver Silkscreen Printing on PU Cover",
+  },
+  { image: "printing-blind-emboss.jpg", title: "Blind Debossing on PU Cover" },
+  {
+    image: "printing-gold-silver-emboss-hotstamp.jpg",
+    title: "Gold/Silver Debossed Hot-Stamping on PU Cover",
+  },
+  {
+    image: "printing-2-colour-silkscreen.jpg",
+    title: "2 Colour Silk-Screen on Products",
+  },
+  {
+    image: "printing-1-colour-silkscreen.jpg",
+    title: "1 Colour Silk-Screen on Pens",
+  },
+  {
+    image: "printing-laser-engraving.jpg",
+    title: "Laser Engraving on Metal Surfaces",
+  },
+  {
+    image: "printing-1-colour-silkscreen-mugs.jpg",
+    title: "1 Colour Silk-Screen on Mugs",
+  },
+];
+---
+
+<Layout currentPage="logo-imprints">
+  <div class="flex flex-col items-center justify-center h-full">
+    <div class="max-w-3xl px-6 mx-auto my-6 lg:my-12">
+      <h1 class="mb-6 text-4xl lg:text-5xl font-display">
+        Logo printing options
+      </h1>
+      <p class="mb-4">
+        Below are examples of logo printing options for products like corporate
+        diaries, organisers, portfolios, planners, note books and corporate
+        gifts like electronic gadgets, pens, mugs, etc. Kindly contact our sales
+        team regarding the type of logo printing option suitable for your
+        selected choice.
+      </p>
+    </div>
+    <div
+      class="container grid max-w-6xl grid-cols-2 gap-4 mb-24 md:grid-cols-3 lg:grid-cols-4"
+    >
+      {
+        options.map((option) => (
+          <div class="flex flex-col items-center gap-4 p-4 text-center">
+            <img src={option.image} alt={option.title} />
+            <p>
+              <strong>{option.title}</strong>
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</Layout>
