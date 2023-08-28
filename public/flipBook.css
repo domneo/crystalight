@@ -1,0 +1,23 @@
+#logoBar {
+  display: none;
+}
+#backBtn {
+  position: fixed;
+  top: 27px;
+  left: 27px;
+  display: block;
+  background: #fff;
+  color: #2e2e2e;
+  border-radius: 48px;
+  filter: drop-shadow(rgba(0, 0, 0, 0.03) 0px 20px 13px)
+    drop-shadow(rgba(0, 0, 0, 0.08) 0px 8px 5px);
+  padding: 12px 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  transition: 0.3s all;
+}
+#backBtn:hover {
+  text-decoration: none;
+  background: #eee;
+  translate: 0 -4px;
+}

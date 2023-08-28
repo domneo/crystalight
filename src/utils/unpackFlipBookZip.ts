@@ -1,5 +1,7 @@
 import fs from "fs";
+import { readFile } from "fs/promises";
 import JSZip from "jszip";
+import { parse } from "node-html-parser";
 
 const appendPublicFolder = (fileData: string, publicFolder: string) => {
   const publicFolderEncoded = encodeURI(publicFolder);
@@ -53,13 +55,33 @@ export const unpackFlipBookZip = async (zipBuffer: ArrayBuffer) => {
         // Extract plaintext files to public directory
         if (["svg", "js", "css", "html"].includes(elementExt || "")) {
           const fileData = await fileObj.async("string");
-          const updatedFileData = appendPublicFolder(fileData, filePathArr[0]);
+          let updatedFileData = appendPublicFolder(fileData, filePathArr[0]);
 
           let writePath = "";
           if (isRootFile) {
             // Only root HTML file should be extracted to pages directory
             rootPath = encodeURI(fileName || "");
             writePath = `src/pages/${fileName}`;
+
+            // Add a custom styles and back button
+            const html = parse(updatedFileData);
+            const head = html.querySelector("head");
+            const body = html.querySelector("body");
+            const backIcon = await readFile(
+              "public/icon-undo-2-dark.svg",
+              "utf8"
+            );
+
+            head?.insertAdjacentHTML(
+              "beforeend",
+              `<link rel="stylesheet" href="flipBook.css" />`
+            );
+            body?.insertAdjacentHTML(
+              "beforeend",
+              `<a id="backBtn" href="/" title="Back to catalogues" style="display:flex; align-items:center; gap:8px;">${backIcon} Back to catalogues</a>`
+            );
+
+            updatedFileData = html.toString();
           } else {
             writePath = `public/${filePath}`;
           }

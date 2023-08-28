@@ -12,7 +12,7 @@ const { title, description, fileId, imageId } = Astro.props;
 
 const image: string = (await getMedia(imageId)).source_url;
 const fileURL: string = (await getMedia(fileId)).source_url;
-const fileExt: string = fileURL.split(".").pop() || "";
+const fileExt: string = fileURL?.split(".").pop() || "";
 let linkURL: string | undefined = fileURL;
 if (fileExt === "zip") {
   const res = await fetch(fileURL);
