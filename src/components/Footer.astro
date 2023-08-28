@@ -1,15 +1,25 @@
 ---
+interface Props {
+  compact?: boolean;
+}
+
+const { compact } = Astro.props;
+
 const year = new Date().getFullYear();
 const company = "Crystalight Printcraft";
 const address = "Blk 13 Lor 8 Toa Payoh #05-08 Braddell Tech Singapore 319261";
 const telephone = "+65 6251 5313";
 const fax = "+65 6254 5313";
 const email = "enquiry@crystalight.com.sg";
+
+const wrapperClass = compact
+  ? "px-6 py-4 justify-center footer bg-base-content text-base-100"
+  : "px-10 py-6 footer bg-base-content text-base-100";
 ---
 
-<footer class="px-10 py-6 footer bg-base-content text-base-100">
+<footer class={wrapperClass}>
   <div class="items-center grid-flow-col gap-3">
-    <img src="logo-icon-white.svg" width="40px" height="40px" />
+    {!compact && <img src="/logo-icon-white.svg" width="40px" height="40px" />}
     <p>
       <span class="inline-block">© {year} {company}.</span>
       <span class="inline-block">All Rights Reserved.</span>
@@ -21,29 +31,35 @@ const email = "enquiry@crystalight.com.sg";
       </span>
     </p>
   </div>
-  <div class="md:place-self-center md:justify-self-end">
-    <div class="grid grid-flow-col gap-4">
-      <p class="md:text-right">
-        <span class="inline-block">{address}</span>
-        <br />
-        <span class="inline-block">
-          Tel: <a
-            href={`tel:${telephone}`}
-            title={telephone}
-            class="rounded link"
-          >
-            {telephone}
-          </a>
-        </span>
-        <span> •</span>
-        <span class="inline-block">Fax: {fax}</span>
-        <span> •</span>
-        <span class="inline-block">
-          Email: <a href={`mailto:${email}`} title={email} class="rounded link">
-            {email}
-          </a>
-        </span>
-      </p>
-    </div>
-  </div>
+  {
+    !compact && (
+      <div class="md:place-self-center md:justify-self-end">
+        <div class="grid grid-flow-col gap-4">
+          <p class="md:text-right">
+            <span class="inline-block">{address}</span>
+            <br />
+            <span class="inline-block">
+              Tel:{" "}
+              <a
+                href={`tel:${telephone}`}
+                title={telephone}
+                class="rounded link"
+              >
+                {telephone}
+              </a>
+            </span>
+            <span> •</span>
+            <span class="inline-block">Fax: {fax}</span>
+            <span> •</span>
+            <span class="inline-block">
+              Email:{" "}
+              <a href={`mailto:${email}`} title={email} class="rounded link">
+                {email}
+              </a>
+            </span>
+          </p>
+        </div>
+      </div>
+    )
+  }
 </footer>

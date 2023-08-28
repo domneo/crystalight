@@ -1,16 +1,17 @@
 const baseUrl = "https://admin.crystalight.com.sg/wp-json/wp/v2";
 
-interface Catalogue {
+export interface Catalogue {
   id: number;
   title: {
     rendered: string;
   };
   acf: {
     description: string;
-    file: number;
     image: number;
-    size: "lg" | "sm";
-    buttonText: string;
+    catalogue_format: "pdf" | "flipbook";
+    pdf_file?: number;
+    flipbook_id?: string;
+    slug?: string;
   };
 }
 
@@ -20,7 +21,7 @@ export const getMainCatalogues = async (): Promise<MainCatalogue[]> => {
 };
 
 interface SmallCatalogue extends Catalogue {
-  "catalogue-category"?: number[]
+  "catalogue-category"?: number[];
 }
 export const getSmallCatalogues = async (): Promise<SmallCatalogue[]> => {
   return await fetch(`${baseUrl}/catalogue_small`).then((res) => res.json());
@@ -30,7 +31,9 @@ interface CatalogueCategory {
   id: number;
   name: string;
 }
-export const getCatalogueCategories = async (): Promise<CatalogueCategory[]> => {
+export const getCatalogueCategories = async (): Promise<
+  CatalogueCategory[]
+> => {
   return await fetch(`${baseUrl}/catalogue-category`).then((res) => res.json());
 };
 
@@ -41,6 +44,6 @@ interface Media {
   };
   source_url: string;
 }
-export const getMedia = async (id: number): Promise<Media> => {
+export const getMedia = async (id?: number): Promise<Media> => {
   return await fetch(`${baseUrl}/media/${id}`).then((res) => res.json());
 };

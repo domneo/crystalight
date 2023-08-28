@@ -1,31 +1,28 @@
 ---
-import { unpackFlipBookZip } from "../utils/unpackFlipBookZip";
 import { getMedia } from "../services/wpService";
 
 interface Props {
   title: string;
   description?: string;
-  fileId: number;
   imageId: number;
+  catalogueFormat: "pdf" | "flipbook";
+  pdfFileId?: number;
+  slug?: string;
 }
-const { title, description, fileId, imageId } = Astro.props;
+const { title, description, imageId, catalogueFormat, pdfFileId, slug } =
+  Astro.props;
 
 const image: string = (await getMedia(imageId)).source_url;
-const fileURL: string = (await getMedia(fileId)).source_url;
-const fileExt: string = fileURL?.split(".").pop() || "";
-let linkURL: string | undefined = fileURL;
-if (fileExt === "zip") {
-  const res = await fetch(fileURL);
-  const zipBuffer = await res.arrayBuffer();
-  const { rootPath } = await unpackFlipBookZip(zipBuffer);
-  linkURL = rootPath;
-}
+const url =
+  catalogueFormat === "pdf"
+    ? (await getMedia(pdfFileId)).source_url
+    : `/catalogues/${slug}`;
 ---
 
 <a
-  href={linkURL}
+  href={url}
   title={title}
-  target="_blank"
+  target={catalogueFormat === "pdf" ? "_blank" : "_self"}
   class="w-full max-w-sm mx-auto text-center transition-all card card-compact bg-neutral-content hover:-translate-y-2 hover:shadow-2xl"
 >
   <figure class="h-56">

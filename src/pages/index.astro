@@ -23,10 +23,10 @@ const catalogueCategories = await getCatalogueCategories();
           <CatalogueMain
             title={catalogue.title.rendered}
             description={catalogue.acf.description}
-            fileId={catalogue.acf.file}
             imageId={catalogue.acf.image}
-            buttonText={catalogue.acf.buttonText}
-            size={catalogue.acf.size}
+            catalogueFormat={catalogue.acf.catalogue_format}
+            pdfFileId={catalogue.acf.pdf_file}
+            slug={catalogue.acf.slug}
           />
         ))
       }
@@ -47,8 +47,10 @@ const catalogueCategories = await getCatalogueCategories();
                   <CatalogueSmall
                     title={catalogue.title.rendered}
                     description={catalogue.acf.description}
-                    fileId={catalogue.acf.file}
                     imageId={catalogue.acf.image}
+                    catalogueFormat={catalogue.acf.catalogue_format}
+                    pdfFileId={catalogue.acf.pdf_file}
+                    slug={catalogue.acf.slug}
                   />
                 ))}
               </div>

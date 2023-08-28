@@ -1,60 +1,45 @@
 ---
-import { unpackFlipBookZip } from "../utils/unpackFlipBookZip";
 import { getMedia } from "../services/wpService";
 
 interface Props {
   title: string;
   description?: string;
-  fileId: number;
   imageId: number;
-  buttonText?: string;
-  size?: "lg" | "sm";
+  catalogueFormat: "pdf" | "flipbook";
+  pdfFileId?: number;
+  slug?: string;
 }
-const {
-  title,
-  description,
-  fileId,
-  imageId,
-  buttonText = "View catalogue",
-  size,
-} = Astro.props;
+const { title, description, imageId, catalogueFormat, pdfFileId, slug } =
+  Astro.props;
 
 const image: string = (await getMedia(imageId)).source_url;
-const fileURL: string = (await getMedia(fileId)).source_url;
-const fileExt: string = fileURL?.split(".").pop() || "";
-let linkURL: string | undefined = fileURL;
-if (fileExt === "zip") {
-  const res = await fetch(fileURL);
-  const zipBuffer = await res.arrayBuffer();
-  const { rootPath } = await unpackFlipBookZip(zipBuffer);
-  linkURL = rootPath;
-}
-
-const cardBodyWidths = size === "sm" ? "xl:w-2/3" : "md:w-2/3";
-const cardBodyPadding = size === "sm" ? "py-12" : "py-12 lg:px-14";
-const cardTitleSize =
-  size === "sm" ? "text-3xl xl:text-4xl" : "text-3xl lg:text-5xl 2xl:text-6xl";
+const url =
+  catalogueFormat === "pdf"
+    ? (await getMedia(pdfFileId)).source_url
+    : `/catalogues/${slug}`;
 ---
 
-<div class={`card-${size} card bg-base-100 shadow-xl image-full`}>
+<div class="shadow-xl card w-full bg-base-100 image-full">
   <figure>
     <img src={image} alt={title} />
   </figure>
   <div
-    class={`card-body justify-center rounded-l-2xl bg-gradient-to-r from-accent-content ${cardBodyWidths} ${cardBodyPadding}`}
+    class="justify-center py-12 card-body rounded-l-2xl bg-gradient-to-r from-accent-content md:w-2/3 lg:px-14"
   >
-    <h2 class={`card-title ${cardTitleSize} font-display font-medium`}>
+    <h2
+      class="text-3xl font-medium card-title lg:text-5xl 2xl:text-6xl font-display"
+    >
       {title}
     </h2>
     {description && <p class="grow-0">{description}</p>}
     <div class="mt-4 card-actions 2xl:mt-6">
       <a
-        href={linkURL}
-        title={buttonText}
-        target="_blank"
+        href={url}
+        title={"View catalogue"}
+        target={catalogueFormat === "pdf" ? "_blank" : "_self"}
         class="tracking-wider btn btn-primary glass text-base-100"
       >
-        {buttonText}
+        View catalogue
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"
@@ -78,20 +63,5 @@ const cardTitleSize =
 <style>
   .card.image-full:before {
     opacity: 0.5;
-  }
-
-  .card-sm,
-  .card-lg {
-    width: 100%;
-  }
-  @media (min-width: 768px) {
-    .card-sm {
-      width: calc(50% - 8px);
-    }
-  }
-  @media (min-width: 1024px) {
-    .card-sm {
-      width: calc(50% - 16px);
-    }
   }
 </style>
