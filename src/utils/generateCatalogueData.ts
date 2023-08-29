@@ -20,6 +20,7 @@ export const generateCatalogueData = async (props: CatalogueProps) => {
     url = `/catalogues/${props.slug}`;
     image = (await getMedia(props.imageId)).source_url;
 
+    // Use first image of FlipBook if preview image is not defined
     if (!image) {
       image = `https://admin.crystalight.com.sg/wp-content/uploads/flipbook/${props.flipbookId}/files/page/1.jpg`;
     }
