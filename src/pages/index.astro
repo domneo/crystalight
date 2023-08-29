@@ -5,6 +5,7 @@ import {
   getSmallCatalogues,
 } from "../services/wpService";
 import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
 import CatalogueMain from "../components/CatalogueMain.astro";
 import CatalogueSmall from "../components/CatalogueSmall.astro";
 
@@ -15,9 +16,18 @@ const catalogueCategories = await getCatalogueCategories();
 
 <Layout currentPage="home">
   <div
-    class="container flex flex-col justify-center h-full px-6 pt-2 pb-24 mx-auto"
+    class="flex flex-col justify-center h-full px-6 pt-2 pb-24 mx-auto lg:container"
   >
-    <div class="flex flex-wrap justify-between gap-4 mx-auto lg:gap-8">
+    <Hero
+      images={[
+        { src: "/banner1.jpg", title: "Welcome to Crystalight Printcraft" },
+        { src: "/banner2.jpg", title: "Calendars" },
+        { src: "/banner3.jpg", title: "Diaries" },
+        { src: "/banner4.jpg", title: "Corporate Gifts" },
+        { src: "/banner5.jpg", title: "Corporate Gifts" },
+      ]}
+    />
+    <div class="flex flex-wrap justify-between w-full gap-4 mx-auto lg:gap-8">
       {
         mainCatalogues.map((catalogue) => (
           <CatalogueMain

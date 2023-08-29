@@ -1,0 +1,69 @@
+---
+interface HeroImage {
+  src: string;
+  title: string;
+}
+interface Props {
+  images: HeroImage[];
+}
+const { images } = Astro.props;
+---
+
+<div class="relative w-full mb-12 stack hero-images">
+  {
+    images.map((image) => (
+      <figure class="flex overflow-hidden transition-all duration-300 shadow-xl rounded-2xl bg-base-100 hero-image">
+        <img src={image.src} alt={image.title} class="object-cover w-full" />
+      </figure>
+    ))
+  }
+</div>
+
+<script>
+  setInterval(() => {
+    const imagesWrapper = document.querySelector(".hero-images");
+    const images = document.querySelectorAll(".hero-image");
+    images[0].classList.add("is-removing");
+    setTimeout(() => {
+      images[0].classList.remove("is-removing");
+    }, 300);
+    setTimeout(() => {
+      imagesWrapper?.insertAdjacentElement("beforeend", images[0]);
+    }, 150);
+  }, 3000);
+</script>
+
+<style>
+  .hero-image {
+    height: 12rem;
+  }
+  @media (min-width: 640px) {
+    .hero-image {
+      height: 18rem;
+    }
+  }
+  @media (min-width: 768px) {
+    .hero-image {
+      height: 20rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .hero-image {
+      height: 24rem;
+    }
+  }
+  @media (min-width: 1280px) {
+    .hero-image {
+      height: 28rem;
+    }
+  }
+  @media (min-width: 1536px) {
+    .hero-image {
+      height: 32rem;
+    }
+  }
+  .is-removing {
+    opacity: 0 !important;
+    translate: 0 5%;
+  }
+</style>
