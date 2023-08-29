@@ -6,6 +6,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "./setup.sh && astro build",
+    "build-local": "astro build",
     "preview": "astro preview",
     "astro": "astro",
     "prettier": "prettier --write . --plugin=prettier-plugin-astro"
