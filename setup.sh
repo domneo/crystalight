@@ -1,3 +1,5 @@
+# To fix canvas zlib issue: https://github.com/ivansevillaa/use-next-blurhash/issues/4
+
 yum install wget
 
 wget https://github.com/NixOS/patchelf/archive/refs/tags/0.17.0.tar.gz
@@ -9,12 +11,12 @@ make
 make install
 cd ..
 
-wget https://zlib.net/fossils/zlib-1.2.9.tar.gz
-tar -xf zlib-1.2.9.tar.gz
-cd zlib-1.2.9
+wget https://zlib.net/fossils/zlib-1.3.tar.gz
+tar -xf zlib-1.3.tar.gz
+cd zlib-1.3
 sh configure
 make
-cp libz.so.1.2.9 ../node_modules/canvas/build/Release/libz.so.X
+cp libz.so.1.3 ../node_modules/canvas/build/Release/libz.so.X
 cd ..
 
 patchelf --replace-needed /lib64/libz.so.1 libz.so.X ./node_modules/canvas/build/Release/libpng16.so.16
