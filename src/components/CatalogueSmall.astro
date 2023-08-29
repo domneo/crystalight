@@ -15,7 +15,7 @@ const { url, image } = await generateCatalogueData(Astro.props);
     target={catalogueFormat === "pdf" ? "_blank" : "_self"}
     class="transition-colors hover:text-neutral-focus"
   >
-    <div class="flex max-h-96">
+    <div class="flex justify-center max-h-96">
       <figure class="flex justify-center">
         <img
           src={image}
