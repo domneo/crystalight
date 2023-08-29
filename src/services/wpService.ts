@@ -14,7 +14,8 @@ export interface Catalogue {
   };
   acf: {
     description: string;
-    image?: number;
+    image_pdf?: number;
+    image_flipbook?: number;
     catalogue_format: "pdf" | "flipbook";
     pdf_file?: number;
     flipbook_id?: string;

@@ -12,7 +12,7 @@ const { images } = Astro.props;
 <div class="relative w-full mb-12 stack hero-images">
   {
     images.map((image) => (
-      <figure class="flex overflow-hidden shadow-xl transition-all duration-300 rounded-2xl bg-base-100 hero-image">
+      <figure class="flex overflow-hidden transition-all duration-300 shadow-xl rounded-2xl bg-base-100 hero-image">
         <img src={image.src} alt={image.title} class="object-cover w-full" />
       </figure>
     ))

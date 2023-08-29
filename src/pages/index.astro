@@ -35,7 +35,8 @@ const catalogueCategories = await getCatalogueCategories();
           <CatalogueMain
             title={catalogue.title.rendered}
             description={catalogue.acf.description}
-            imageId={catalogue.acf.image}
+            imagePdfId={catalogue.acf.image_pdf}
+            imageFlipbookId={catalogue.acf.image_flipbook}
             catalogueFormat={catalogue.acf.catalogue_format}
             pdfFileId={catalogue.acf.pdf_file}
             flipbookId={catalogue.acf.flipbook_id}
@@ -60,7 +61,8 @@ const catalogueCategories = await getCatalogueCategories();
                   <CatalogueSmall
                     title={catalogue.title.rendered}
                     description={catalogue.acf.description}
-                    imageId={catalogue.acf.image}
+                    imagePdfId={catalogue.acf.image_pdf}
+                    imageFlipbookId={catalogue.acf.image_flipbook}
                     catalogueFormat={catalogue.acf.catalogue_format}
                     pdfFileId={catalogue.acf.pdf_file}
                     flipbookId={catalogue.acf.flipbook_id}
