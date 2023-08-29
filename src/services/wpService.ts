@@ -25,7 +25,7 @@ export interface Catalogue {
 
 interface MainCatalogue extends Catalogue {}
 export const getMainCatalogues = async (): Promise<MainCatalogue[]> => {
-  return await fetch(`${baseUrl}/catalogue_main`, { headers }).then((res) =>
+  return await fetch(`${baseUrl}/catalogue_mainn`, { headers }).then((res) =>
     res.json()
   );
 };
