@@ -27,7 +27,9 @@ const catalogueCategories = await getCatalogueCategories();
         { src: "/banner5.jpg", title: "Corporate Gifts" },
       ]}
     />
-    <div class="flex flex-wrap justify-between w-full gap-4 mx-auto lg:gap-8">
+    <div
+      class="flex flex-wrap justify-around w-full mx-auto mt-4 gap-4 md:gap-0 md:mt-4 2xl:mt-8"
+    >
       {
         mainCatalogues.map((catalogue) => (
           <CatalogueMain
@@ -36,6 +38,7 @@ const catalogueCategories = await getCatalogueCategories();
             imageId={catalogue.acf.image}
             catalogueFormat={catalogue.acf.catalogue_format}
             pdfFileId={catalogue.acf.pdf_file}
+            flipbookId={catalogue.acf.flipbook_id}
             slug={catalogue.acf.slug}
           />
         ))
@@ -52,7 +55,7 @@ const catalogueCategories = await getCatalogueCategories();
               <h2 class="mb-6 text-3xl lg:text-4xl font-display">
                 {category.name}
               </h2>
-              <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 {smallCataloguesFiltered.map((catalogue) => (
                   <CatalogueSmall
                     title={catalogue.title.rendered}
@@ -60,6 +63,7 @@ const catalogueCategories = await getCatalogueCategories();
                     imageId={catalogue.acf.image}
                     catalogueFormat={catalogue.acf.catalogue_format}
                     pdfFileId={catalogue.acf.pdf_file}
+                    flipbookId={catalogue.acf.flipbook_id}
                     slug={catalogue.acf.slug}
                   />
                 ))}

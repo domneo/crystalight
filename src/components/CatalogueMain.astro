@@ -1,67 +1,29 @@
 ---
-import { getMedia } from "../services/wpService";
+import type { CatalogueProps } from "../utils/generateCatalogueData";
+import { generateCatalogueData } from "../utils/generateCatalogueData";
 
-interface Props {
-  title: string;
-  description?: string;
-  imageId: number;
-  catalogueFormat: "pdf" | "flipbook";
-  pdfFileId?: number;
-  slug?: string;
-}
-const { title, description, imageId, catalogueFormat, pdfFileId, slug } =
-  Astro.props;
+interface Props extends CatalogueProps {}
+const { title, description, catalogueFormat } = Astro.props;
 
-const image: string = (await getMedia(imageId)).source_url;
-const url =
-  catalogueFormat === "pdf"
-    ? (await getMedia(pdfFileId)).source_url
-    : `/catalogues/${slug}`;
+const { url, image } = await generateCatalogueData(Astro.props);
 ---
 
-<div class="w-full shadow-xl card bg-base-100 image-full">
-  <figure>
-    <img src={image} alt={title} />
-  </figure>
-  <div
-    class="justify-center py-12 card-body rounded-l-2xl bg-gradient-to-r from-accent-content md:w-2/3 lg:px-14"
+<div class="p-4 text-center md:p-8 xl:p-12 2xl:p-16 sm:w-2/3 md:w-1/2">
+  <a
+    href={url}
+    title={title}
+    target={catalogueFormat === "pdf" ? "_blank" : "_self"}
+    class="transition-colors hover:text-neutral-focus"
   >
-    <h2
-      class="text-3xl font-medium card-title lg:text-5xl 2xl:text-6xl font-display"
+    <figure
+      class="overflow-hidden rounded-lg transition-all hover:-translate-y-2 hover:shadow-2xl hover:-rotate-1"
     >
-      {title}
-    </h2>
+      <img src={image} alt={title} />
+    </figure>
+    <h2
+      class="mt-4 mb-2 text-3xl font-medium lg:mt-6 lg:mb-4 lg:text-4xl 2xl:text-5xl font-display"
+      set:html={title}
+    />
     {description && <p class="grow-0">{description}</p>}
-    <div class="mt-4 card-actions 2xl:mt-6">
-      <a
-        href={url}
-        title={"View catalogue"}
-        target={catalogueFormat === "pdf" ? "_blank" : "_self"}
-        class="tracking-wider btn btn-primary glass text-base-100"
-      >
-        View catalogue
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="lucide lucide-arrow-right"
-        >
-          <path d="M5 12h14"></path>
-          <path d="m12 5 7 7-7 7"></path>
-        </svg>
-      </a>
-    </div>
-  </div>
+  </a>
 </div>
-
-<style>
-  .card.image-full:before {
-    opacity: 0.5;
-  }
-</style>

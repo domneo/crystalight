@@ -1,35 +1,32 @@
 ---
-import { getMedia } from "../services/wpService";
+import type { CatalogueProps } from "../utils/generateCatalogueData";
+import { generateCatalogueData } from "../utils/generateCatalogueData";
 
-interface Props {
-  title: string;
-  description?: string;
-  imageId: number;
-  catalogueFormat: "pdf" | "flipbook";
-  pdfFileId?: number;
-  slug?: string;
-}
-const { title, description, imageId, catalogueFormat, pdfFileId, slug } =
-  Astro.props;
+interface Props extends CatalogueProps {}
+const { title, description, catalogueFormat } = Astro.props;
 
-const image: string = (await getMedia(imageId)).source_url;
-const url =
-  catalogueFormat === "pdf"
-    ? (await getMedia(pdfFileId)).source_url
-    : `/catalogues/${slug}`;
+const { url, image } = await generateCatalogueData(Astro.props);
 ---
 
-<a
-  href={url}
-  title={title}
-  target={catalogueFormat === "pdf" ? "_blank" : "_self"}
-  class="w-full max-w-sm mx-auto text-center transition-all card card-compact bg-neutral-content hover:-translate-y-2 hover:shadow-2xl"
->
-  <figure class="h-56">
-    <img src={image} alt={title} class="object-cover w-full" />
-  </figure>
-  <div class="card-body">
-    <h2 class="justify-center font-semibold card-title">{title}</h2>
-    {description && <p>{description}</p>}
-  </div>
-</a>
+<div class="text-center">
+  <a
+    href={url}
+    title={title}
+    target={catalogueFormat === "pdf" ? "_blank" : "_self"}
+    class="transition-colors hover:text-neutral-focus"
+  >
+    <div class="flex max-h-96">
+      <figure class="flex justify-center">
+        <img
+          src={image}
+          alt={title}
+          class="object-contain rounded-lg transition-all hover:-translate-y-2 hover:shadow-2xl"
+        />
+      </figure>
+    </div>
+    <div class="my-4">
+      <h2 class="justify-center text-xl font-semibold" set:html={title} />
+      {description && <p>{description}</p>}
+    </div>
+  </a>
+</div>
