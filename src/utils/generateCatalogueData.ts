@@ -12,7 +12,7 @@ export interface CatalogueProps {
 }
 
 export const generateCatalogueData = async (props: CatalogueProps) => {
-  let image = "/catalogue_placeholder.svg";
+  let image;
   let url;
 
   if (props.catalogueFormat === "flipbook") {
@@ -28,6 +28,10 @@ export const generateCatalogueData = async (props: CatalogueProps) => {
   if (props.catalogueFormat === "pdf") {
     url = (await getMedia(props.pdfFileId)).source_url;
     image = (await getMedia(props.imagePdfId)).source_url;
+  }
+
+  if (!image) {
+    image = "/catalogue_placeholder.svg";
   }
 
   return { image, url };
