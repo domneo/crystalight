@@ -12,6 +12,8 @@ import CatalogueSmall from "../components/CatalogueSmall.astro";
 const mainCatalogues = await getMainCatalogues();
 const smallCatalogues = await getSmallCatalogues();
 const catalogueCategories = await getCatalogueCategories();
+
+console.log(mainCatalogues);
 ---
 
 <Layout currentPage="home">
@@ -28,7 +30,7 @@ const catalogueCategories = await getCatalogueCategories();
       ]}
     />
     <div
-      class="flex flex-wrap justify-around w-full mx-auto mt-4 gap-4 md:gap-0 md:mt-4 2xl:mt-8"
+      class="flex flex-wrap justify-around w-full gap-4 mx-auto mt-4 md:gap-0 md:mt-4 2xl:mt-8"
     >
       {
         mainCatalogues.map((catalogue) => (
