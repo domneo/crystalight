@@ -35,46 +35,22 @@ const pdfFileUrl = (await getMedia(Astro.props.pdfFileID)).source_url;
 ---
 
 <Layout currentPage="catalogues" compact>
-  <div class="flex flex-col w-full h-full">
-    <ul class="navigation">
-      <li class="navigation__item">
-        <!-- Navigate to the Previous page -->
-        <a href="#" class="previous round" id="prev_page"> Prev</a>
-
-        <!-- Navigate to a specific page -->
-        <input type="number" value="1" id="current_page" />
-
-        <!-- Navigate to the Next page -->
-        <a href="#" class="next round" id="next_page"> Next</a>
-
-        <!-- Page Info -->
-         Page
-        <span id="page_num"></span>
-         of
-        <span id="page_count"></span>
-      </li>
-
-      <!-- Zoom In and Out -->
-      <li class="navigation__item">
-        <button class="zoom" id="zoom_in"> Zoom in</button>
-
-        <button class="zoom" id="zoom_out"> Zoom out</button>
-      </li>
-    </ul>
-
-    <!-- Canvas to place the PDF -->
-    <pdf-canvas data-url={pdfFileUrl} class="overflow-auto grow">
-      <canvas id="canvas" class="canvas__container"></canvas>
-    </pdf-canvas>
-  </div>
+  <pdf-viewer data-url={pdfFileUrl}>
+    <iframe
+      id="pdfViewer"
+      title="PDF Catalogue"
+      style="width:100%;height:100%;border:none;"></iframe>
+  </pdf-viewer>
 </Layout>
 
 <!-- Load PDF.js -->
-<script is:inline src="/pdf.js"></script>
+<script is:inline src="/pdfjs/build/pdf.js"></script>
+<script is:inline src="/pdfjs/web/viewer.js"></script>
+<link rel="stylesheet" href="/pdfjs/web/viewer.css" />
 
 <!-- Load the PDF -->
 <script is:inline>
-class PdfCanvas extends HTMLElement {
+class PdfViewer extends HTMLElement {
   constructor() {
     super();
 
@@ -82,150 +58,16 @@ class PdfCanvas extends HTMLElement {
       const url = new URL(this.dataset.url);
       const origin =
         window?.location.origin === "http://localhost:3000"
-          ? "http://localhost:8010/proxy"
+          ? "http://localhost:8010/proxy" // use local proxy
           : url.origin;
-      this.loadPDF(`${origin}${url.pathname}`);
+      this.loadPdf(`${origin}${url.pathname}`);
     }
   }
 
-  async loadPDF(pdfUrl) {
-    const pageNum = document.querySelector("#page_num");
-    const pageCount = document.querySelector("#page_count");
-    const currentPage = document.querySelector("#current_page");
-    const previousPage = document.querySelector("#prev_page");
-    const nextPage = document.querySelector("#next_page");
-    const zoomIn = document.querySelector("#zoom_in");
-    const zoomOut = document.querySelector("#zoom_out");
-
-    const initialState = {
-      pdfDoc: null,
-      currentPage: 1,
-      pageCount: 0,
-      zoom: 1,
-    };
-
-    // Render the page.
-    const renderPage = async () => {
-      if (initialState.pdfDoc === null) return;
-
-      // Load the first page.
-      const page = await initialState.pdfDoc.getPage(
-        initialState.currentPage
-      );
-      const canvas = document.querySelector("#canvas");
-      const ctx = canvas?.getContext("2d");
-      const viewport = page.getViewport({
-        scale: initialState.zoom,
-      });
-
-      // Set canvas width and height
-      canvas.width = viewport.width;
-      canvas.height = viewport.height;
-
-      // Render the PDF page into the canvas context.
-      const renderCtx = {
-        canvasContext: ctx,
-        viewport: viewport,
-      };
-      page.render(renderCtx);
-
-      // Set page number
-      if (pageNum) {
-        pageNum.textContent = initialState.currentPage.toString();
-      }
-    };
-
-    // Show previous page
-    const showPrevPage = () => {
-      if (initialState.pdfDoc === null) return;
-      if (initialState.currentPage <= 1) return;
-
-      initialState.currentPage--;
-
-      // Get the new page number and render it.
-      if (currentPage) {
-        currentPage.value = initialState.currentPage.toString();
-      }
-      renderPage();
-    };
-
-    // Show next page
-    const showNextPage = () => {
-      if (initialState.pdfDoc === null) return;
-      if (initialState.currentPage >= initialState.pdfDoc._pdfInfo.numPages)
-        return;
-
-      initialState.currentPage++;
-
-      // Get the new page number and render it.
-      if (currentPage) {
-        currentPage.value = initialState.currentPage.toString();
-      }
-      renderPage();
-    };
-
-    // Zoom in
-    const onZoomIn = () => {
-      if (initialState.pdfDoc === null) return;
-
-      // Get the new zoom value and render it.
-      initialState.zoom *= 4 / 3;
-      renderPage();
-    };
-
-    // Zoom out
-    const onZoomOut = () => {
-      if (initialState.pdfDoc === null) return;
-
-      // Get the new zoom value and render it.
-      initialState.zoom *= 2 / 3;
-      renderPage();
-    };
-
-    // Keypress
-    const onKeypress = (event) => {
-      if (initialState.pdfDoc === null) return;
-
-      // Get the key code.
-      const keycode = event.keyCode ? event.keyCode : event.which;
-      if (keycode === 13) {
-        // Get the new page number and render it.
-        let desiredPage = currentPage.valueAsNumber;
-        initialState.currentPage = Math.min(
-          Math.max(desiredPage, 1),
-          initialState.pdfDoc._pdfInfo.numPages
-        );
-        currentPage.value = initialState.currentPage.toString();
-        renderPage();
-      }
-    };
-
-    // Load the document
-    let headers = new Headers();
-    headers.append(
-      "Authorization",
-      "Basic " +
-      btoa(import.meta.env.WP_USERNAME + ":" + import.meta.env.WP_PASSWORD)
-    );
-    initialState.pdfDoc = await pdfjsLib.getDocument({
-      url: pdfUrl,
-      httpHeaders: headers,
-    }).promise;
-
-    if (pageCount && initialState.pdfDoc) {
-      pageCount.textContent = initialState.pdfDoc.numPages;
-      renderPage();
-    }
-
-    // Button events
-    previousPage?.addEventListener("click", showPrevPage);
-    nextPage?.addEventListener("click", showNextPage);
-    zoomIn?.addEventListener("click", onZoomIn);
-    zoomOut?.addEventListener("click", onZoomOut);
-
-    // Keyboard events
-    currentPage.addEventListener("keypress", onKeypress);
+  loadPdf(pdfUrl) {
+    const iframe = document.querySelector("#pdfViewer");
+    iframe.setAttribute("src", `/pdfjs/web/viewer.html?file=${pdfUrl}`);
   }
 }
-customElements.define("pdf-canvas", PdfCanvas);
+customElements.define("pdf-viewer", PdfViewer);
 </script>
