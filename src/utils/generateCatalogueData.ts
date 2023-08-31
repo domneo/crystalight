@@ -16,7 +16,7 @@ export const generateCatalogueData = async (props: CatalogueProps) => {
   let url;
 
   if (props.catalogueFormat === "flipbook") {
-    url = `/catalogues/${props.slug}`;
+    url = `/catalogues/flip/${props.slug}`;
     image = (await getMedia(props.imageFlipbookId)).source_url;
 
     // Use first image of FlipBook if preview image is not defined
@@ -26,7 +26,7 @@ export const generateCatalogueData = async (props: CatalogueProps) => {
   }
 
   if (props.catalogueFormat === "pdf") {
-    url = (await getMedia(props.pdfFileId)).source_url;
+    url = `/catalogues/pdf/${props.pdfFileId}`;
     image = (await getMedia(props.imagePdfId)).source_url;
   }
 

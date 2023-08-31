@@ -3,7 +3,7 @@ import type { CatalogueProps } from "../utils/generateCatalogueData";
 import { generateCatalogueData } from "../utils/generateCatalogueData";
 
 interface Props extends CatalogueProps {}
-const { title, description, catalogueFormat } = Astro.props;
+const { title, description } = Astro.props;
 
 const { url, image } = await generateCatalogueData(Astro.props);
 ---
@@ -12,7 +12,6 @@ const { url, image } = await generateCatalogueData(Astro.props);
   <a
     href={url}
     title={title}
-    target={catalogueFormat === "pdf" ? "_blank" : "_self"}
     class="transition-colors hover:text-neutral-focus"
   >
     <figure
