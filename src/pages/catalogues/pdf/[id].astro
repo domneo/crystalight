@@ -55,12 +55,7 @@ class PdfViewer extends HTMLElement {
     super();
 
     if (this.dataset.url) {
-      const url = new URL(this.dataset.url);
-      const origin =
-        window?.location.origin === "http://localhost:3000"
-          ? "http://localhost:8010/proxy" // use local proxy
-          : url.origin;
-      this.loadPdf(`${origin}${url.pathname}`);
+      this.loadPdf(this.dataset.url);
     }
   }
 
