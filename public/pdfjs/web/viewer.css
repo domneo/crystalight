@@ -1573,8 +1573,8 @@
   scrollbar-color: var(--scrollbar-color) var(--scrollbar-bg-color);
 }
 
-.hidden,
-[hidden] {
+.viewerHtml .hidden,
+.viewerHtml [hidden] {
   display: none !important;
 }
 
