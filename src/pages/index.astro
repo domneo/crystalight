@@ -1,4 +1,6 @@
 ---
+export const prerender = false;
+
 import {
   getCatalogueCategories,
   getMainCatalogues,
@@ -48,7 +50,7 @@ const catalogueCategories = await getCatalogueCategories();
     {
       catalogueCategories.map((category) => {
         const smallCataloguesFiltered = smallCatalogues.filter(
-          (catalogue) => catalogue["catalogue-category"]?.[0] === category.id
+          (catalogue) => catalogue["catalogue-category"]?.[0] === category.id,
         );
         if (smallCataloguesFiltered.length > 0) {
           return (
