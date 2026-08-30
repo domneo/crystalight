@@ -1,4 +1,4 @@
-import { getMedia } from "../services/wpService";
+import { getFlipbook, getMedia } from "../services/wpService";
 
 export interface CatalogueProps {
   title: string;
@@ -7,7 +7,7 @@ export interface CatalogueProps {
   imageFlipbookId?: number;
   catalogueFormat: "pdf" | "flipbook";
   pdfFileId?: number;
-  flipbookId?: string;
+  flipbookPostId?: number;
   slug?: string;
 }
 
@@ -21,7 +21,8 @@ export const generateCatalogueData = async (props: CatalogueProps) => {
 
     // Use first image of FlipBook if preview image is not defined
     if (!image) {
-      image = `https://admin.crystalight.com.sg/wp-content/uploads/flipbook/${props.flipbookId}/files/page/1.jpg`;
+      const flipbook = await getFlipbook(props.flipbookPostId!);
+      image = `https://admin.crystalight.com.sg/wp-content/uploads/flipbook/${flipbook.meta.flipbook_id}/files/page/1.jpg`;
     }
   }
 

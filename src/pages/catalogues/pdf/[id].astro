@@ -15,8 +15,8 @@ const findPdfFileID = (catalogues: Catalogue[]) =>
   catalogues.find(
     (catalogue) =>
       catalogue.acf.catalogue_format === "pdf" &&
-      String(catalogue.acf.pdf_file) === id,
-  )?.acf.pdf_file;
+      String(catalogue.acf.pdf_details.pdf_file) === id,
+  )?.acf.pdf_details.pdf_file;
 
 const [mainCatalogues, smallCatalogues] = await Promise.all([
   getMainCatalogues(),

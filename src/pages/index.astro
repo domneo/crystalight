@@ -35,12 +35,12 @@ const catalogueCategories = await getCatalogueCategories();
           <CatalogueMain
             title={catalogue.title.rendered}
             description={catalogue.acf.description}
-            imagePdfId={catalogue.acf.image_pdf}
-            imageFlipbookId={catalogue.acf.image_flipbook}
             catalogueFormat={catalogue.acf.catalogue_format}
-            pdfFileId={catalogue.acf.pdf_file}
-            flipbookId={catalogue.acf.flipbook_id}
-            slug={catalogue.acf.slug}
+            imagePdfId={catalogue.acf.pdf_details.image_pdf}
+            pdfFileId={catalogue.acf.pdf_details.pdf_file}
+            imageFlipbookId={catalogue.acf.flipbook_details.image_flipbook}
+            flipbookPostId={catalogue.acf.flipbook_details.flipbook_postid}
+            slug={catalogue.acf.flipbook_details.slug}
           />
         ))
       }
@@ -61,12 +61,16 @@ const catalogueCategories = await getCatalogueCategories();
                   <CatalogueSmall
                     title={catalogue.title.rendered}
                     description={catalogue.acf.description}
-                    imagePdfId={catalogue.acf.image_pdf}
-                    imageFlipbookId={catalogue.acf.image_flipbook}
                     catalogueFormat={catalogue.acf.catalogue_format}
-                    pdfFileId={catalogue.acf.pdf_file}
-                    flipbookId={catalogue.acf.flipbook_id}
-                    slug={catalogue.acf.slug}
+                    imagePdfId={catalogue.acf.pdf_details.image_pdf}
+                    pdfFileId={catalogue.acf.pdf_details.pdf_file}
+                    imageFlipbookId={
+                      catalogue.acf.flipbook_details.image_flipbook
+                    }
+                    flipbookPostId={
+                      catalogue.acf.flipbook_details.flipbook_postid
+                    }
+                    slug={catalogue.acf.flipbook_details.slug}
                   />
                 ))}
               </div>

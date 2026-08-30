@@ -14,12 +14,16 @@ export interface Catalogue {
   };
   acf: {
     description: string;
-    image_pdf?: number;
-    image_flipbook?: number;
     catalogue_format: "pdf" | "flipbook";
-    pdf_file?: number;
-    flipbook?: number;
-    slug?: string;
+    pdf_details: {
+      pdf_file: number;
+      image_pdf: number;
+    };
+    flipbook_details: {
+      flipbook_postid: number;
+      image_flipbook?: number;
+      slug: string;
+    };
   };
 }
 

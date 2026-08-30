@@ -15,8 +15,8 @@ const findFlipbookID = async (catalogues: Catalogue[]) => {
   const flipbookPostID = catalogues.find(
     (catalogue) =>
       catalogue.acf.catalogue_format === "flipbook" &&
-      catalogue.acf.slug === slug,
-  )?.acf.flipbook;
+      catalogue.acf.flipbook_details.slug === slug,
+  )?.acf.flipbook_details.flipbook_postid;
 
   if (!flipbookPostID) {
     return undefined;
