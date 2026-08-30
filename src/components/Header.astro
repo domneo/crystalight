@@ -113,23 +113,23 @@ const menuItemClass = compact
 </header>
 
 <script async>
-const menuEl = document.getElementById("menu");
-const menuOpenEl = document.getElementById("menuOpen");
-const menuCloseEl = document.getElementById("menuClose");
+  const menuEl = document.getElementById("menu");
+  const menuOpenEl = document.getElementById("menuOpen");
+  const menuCloseEl = document.getElementById("menuClose");
 
-const onMenuOpenClick = () => {
-  menuEl?.classList.remove("hidden");
-  menuOpenEl?.classList.add("hidden");
-  menuCloseEl?.classList.remove("hidden");
-};
-const onMenuCloseClick = () => {
-  menuEl?.classList.add("hidden");
-  menuOpenEl?.classList.remove("hidden");
-  menuCloseEl?.classList.add("hidden");
-};
+  const onMenuOpenClick = () => {
+    menuEl?.classList.remove("hidden");
+    menuOpenEl?.classList.add("hidden");
+    menuCloseEl?.classList.remove("hidden");
+  };
+  const onMenuCloseClick = () => {
+    menuEl?.classList.add("hidden");
+    menuOpenEl?.classList.remove("hidden");
+    menuCloseEl?.classList.add("hidden");
+  };
 
-menuOpenEl?.addEventListener("click", onMenuOpenClick);
-menuCloseEl?.addEventListener("click", onMenuCloseClick);
+  menuOpenEl?.addEventListener("click", onMenuOpenClick);
+  menuCloseEl?.addEventListener("click", onMenuCloseClick);
 </script>
 
 <style>
