@@ -1,5 +1,4 @@
 ---
-import { GetStaticPathsResult } from "astro";
 import {
   type Catalogue,
   getMainCatalogues,
@@ -8,34 +7,35 @@ import {
 } from "../../../services/wpService";
 import Layout from "../../../layouts/Layout.astro";
 
-export async function getStaticPaths() {
-  const generateSlugsFromCatalogues = (catalogues: Catalogue[]) => {
-    let paths: GetStaticPathsResult = [];
-    catalogues.forEach(async (catalogue) => {
-      if (catalogue.acf.catalogue_format === "pdf") {
-        paths.push({
-          params: { id: catalogue.acf.pdf_file },
-          props: { pdfFileID: catalogue.acf.pdf_file },
-        });
-      }
-    });
-    return paths;
-  };
+export const prerender = false;
 
-  const mainCatalogues = await getMainCatalogues();
-  const smallCatalogues = await getSmallCatalogues();
+const { id } = Astro.params;
 
-  return [
-    ...generateSlugsFromCatalogues(mainCatalogues),
-    ...generateSlugsFromCatalogues(smallCatalogues),
-  ];
+const findPdfFileID = (catalogues: Catalogue[]) =>
+  catalogues.find(
+    (catalogue) =>
+      catalogue.acf.catalogue_format === "pdf" &&
+      String(catalogue.acf.pdf_file) === id,
+  )?.acf.pdf_file;
+
+const [mainCatalogues, smallCatalogues] = await Promise.all([
+  getMainCatalogues(),
+  getSmallCatalogues(),
+]);
+
+const pdfFileID =
+  findPdfFileID(mainCatalogues) ?? findPdfFileID(smallCatalogues);
+
+if (!pdfFileID) {
+  return new Response(null, { status: 404 });
 }
 
-const pdfFileUrl = (await getMedia(Astro.props.pdfFileID)).source_url;
+const pdfFileUrl = (await getMedia(pdfFileID)).source_url;
+const proxiedPdfFileUrl = `/api/pdf-proxy?url=${encodeURIComponent(pdfFileUrl)}`;
 ---
 
 <Layout currentPage="catalogues" compact>
-  <pdf-viewer data-url={pdfFileUrl}>
+  <pdf-viewer data-url={proxiedPdfFileUrl}>
     <iframe
       id="pdfViewer"
       title="PDF Catalogue"
@@ -50,19 +50,19 @@ const pdfFileUrl = (await getMedia(Astro.props.pdfFileID)).source_url;
 
 <!-- Load the PDF -->
 <script is:inline>
-class PdfViewer extends HTMLElement {
-  constructor() {
-    super();
+  class PdfViewer extends HTMLElement {
+    constructor() {
+      super();
 
-    if (this.dataset.url) {
-      this.loadPdf(this.dataset.url);
+      if (this.dataset.url) {
+        this.loadPdf(this.dataset.url);
+      }
+    }
+
+    loadPdf(pdfUrl) {
+      const iframe = document.querySelector("#pdfViewer");
+      iframe.setAttribute("src", `/pdfjs/web/viewer.html?file=${pdfUrl}`);
     }
   }
-
-  loadPdf(pdfUrl) {
-    const iframe = document.querySelector("#pdfViewer");
-    iframe.setAttribute("src", `/pdfjs/web/viewer.html?file=${pdfUrl}`);
-  }
-}
-customElements.define("pdf-viewer", PdfViewer);
+  customElements.define("pdf-viewer", PdfViewer);
 </script>
