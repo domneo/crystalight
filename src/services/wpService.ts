@@ -4,7 +4,7 @@ let headers = new Headers();
 headers.append(
   "Authorization",
   "Basic " +
-    btoa(import.meta.env.WP_USERNAME + ":" + import.meta.env.WP_PASSWORD)
+    btoa(import.meta.env.WP_USERNAME + ":" + import.meta.env.WP_PASSWORD),
 );
 
 export interface Catalogue {
@@ -26,7 +26,7 @@ export interface Catalogue {
 interface MainCatalogue extends Catalogue {}
 export const getMainCatalogues = async (): Promise<MainCatalogue[]> => {
   return await fetch(`${baseUrl}/catalogue_main`, { headers }).then((res) =>
-    res.json()
+    res.json(),
   );
 };
 
@@ -35,7 +35,7 @@ interface SmallCatalogue extends Catalogue {
 }
 export const getSmallCatalogues = async (): Promise<SmallCatalogue[]> => {
   return await fetch(`${baseUrl}/catalogue_small`, { headers }).then((res) =>
-    res.json()
+    res.json(),
   );
 };
 
@@ -47,7 +47,7 @@ export const getCatalogueCategories = async (): Promise<
   CatalogueCategory[]
 > => {
   return await fetch(`${baseUrl}/catalogue-category`, { headers }).then((res) =>
-    res.json()
+    res.json(),
   );
 };
 
@@ -60,6 +60,6 @@ interface Media {
 }
 export const getMedia = async (id?: number): Promise<Media> => {
   return await fetch(`${baseUrl}/media/${id}`, { headers }).then((res) =>
-    res.json()
+    res.json(),
   );
 };
