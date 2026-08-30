@@ -18,7 +18,7 @@ export interface Catalogue {
     image_flipbook?: number;
     catalogue_format: "pdf" | "flipbook";
     pdf_file?: number;
-    flipbook_id?: string;
+    flipbook?: number;
     slug?: string;
   };
 }
@@ -60,6 +60,18 @@ interface Media {
 }
 export const getMedia = async (id?: number): Promise<Media> => {
   return await fetch(`${baseUrl}/media/${id}`, { headers }).then((res) =>
+    res.json(),
+  );
+};
+
+interface Flipbook {
+  id: number;
+  meta: {
+    flipbook_id?: string;
+  };
+}
+export const getFlipbook = async (id: number): Promise<Flipbook> => {
+  return await fetch(`${baseUrl}/flipbook/${id}`, { headers }).then((res) =>
     res.json(),
   );
 };

@@ -1,6 +1,7 @@
 ---
 import {
   type Catalogue,
+  getFlipbook,
   getMainCatalogues,
   getSmallCatalogues,
 } from "../../../services/wpService";
@@ -10,12 +11,20 @@ export const prerender = false;
 
 const { slug } = Astro.params;
 
-const findFlipbookID = (catalogues: Catalogue[]) =>
-  catalogues.find(
+const findFlipbookID = async (catalogues: Catalogue[]) => {
+  const flipbookPostID = catalogues.find(
     (catalogue) =>
       catalogue.acf.catalogue_format === "flipbook" &&
       catalogue.acf.slug === slug,
-  )?.acf.flipbook_id;
+  )?.acf.flipbook;
+
+  if (!flipbookPostID) {
+    return undefined;
+  }
+
+  const flipbook = await getFlipbook(flipbookPostID);
+  return flipbook.meta?.flipbook_id;
+};
 
 const [mainCatalogues, smallCatalogues] = await Promise.all([
   getMainCatalogues(),
@@ -23,7 +32,8 @@ const [mainCatalogues, smallCatalogues] = await Promise.all([
 ]);
 
 const flipbookID =
-  findFlipbookID(mainCatalogues) ?? findFlipbookID(smallCatalogues);
+  (await findFlipbookID(mainCatalogues)) ??
+  (await findFlipbookID(smallCatalogues));
 
 if (!flipbookID) {
   return new Response(null, { status: 404 });
