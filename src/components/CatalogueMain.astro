@@ -20,9 +20,9 @@ const { url, image } = await generateCatalogueData(Astro.props);
       <img src={image} alt={title} />
     </figure>
     <h2
-      class="mt-4 mb-2 text-3xl font-medium lg:mt-6 lg:mb-4 lg:text-4xl 2xl:text-5xl font-display"
+      class="mt-4 mb-2 text-3xl font-medium lg:mt-6 lg:mb-4 lg:text-4xl 2xl:text-5xl font-display text-balance"
       set:html={title}
     />
-    {description && <p class="grow-0">{description}</p>}
+    {description && <p class="grow-0 text-pretty">{description}</p>}
   </a>
 </div>

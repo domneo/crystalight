@@ -36,11 +36,11 @@ const options = [
 
 <Layout currentPage="logo-imprints">
   <div class="flex flex-col items-center justify-center h-full">
-    <div class="max-w-3xl px-6 mx-auto my-6 lg:my-12">
-      <h1 class="mb-6 text-4xl lg:text-5xl font-display">
+    <div class="max-w-3xl px-4 md:px-6 mx-auto my-6 lg:my-12">
+      <h1 class="mb-6 text-4xl lg:text-5xl font-display text-balance">
         Logo printing options
       </h1>
-      <p class="mb-4">
+      <p class="mb-4 text-pretty">
         Below are examples of logo printing options for products like corporate
         diaries, organisers, portfolios, planners, note books and corporate
         gifts like electronic gadgets, pens, mugs, etc. Kindly contact our sales
@@ -53,7 +53,7 @@ const options = [
     >
       {
         options.map((option) => (
-          <div class="flex flex-col items-center gap-4 p-4 text-center">
+          <div class="flex flex-col items-center gap-4 p-4 text-center text-balance">
             <img src={option.image} alt={option.title} />
             <p>
               <strong>{option.title}</strong>

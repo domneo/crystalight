@@ -13,14 +13,14 @@ interface Props {
 const { compact, navigation } = Astro.props;
 
 const wrapperClass = compact
-  ? "flex items-center justify-between gap-6 px-3 py-2 mx-auto"
-  : "flex items-center justify-between gap-6 px-6 py-4 mx-auto lg:container";
+  ? "flex items-center justify-between gap-4 p-3 mx-auto"
+  : "flex items-center justify-between gap-4 p-3 md:pt-6 mx-auto lg:container";
 const logoWrapperClass = compact
   ? "flex items-center justify-center"
-  : "flex items-center justify-center py-4";
+  : "flex items-center justify-center py-2";
 const menuClass = compact
-  ? "absolute left-auto hidden gap-1 menu bg-neutral-content md:bg-transparent rounded-box drop-shadow-xl md:menu-horizontal mt-14 md:mt-0 right-4 md:relative md:inset-x-0 w-60 md:w-full md:p-0"
-  : "absolute left-auto hidden gap-1 menu bg-neutral-content lg:bg-transparent rounded-box drop-shadow-xl lg:menu-horizontal mt-14 lg:mt-0 right-5 lg:relative lg:inset-x-0 w-60 lg:w-full";
+  ? "absolute left-auto hidden gap-1 menu bg-neutral-content md:bg-transparent rounded-box drop-shadow-xl md:menu-horizontal mt-10 sm:mt-14 md:mt-0 right-3 md:relative md:inset-x-0 w-60 md:w-full md:p-0"
+  : "absolute left-auto hidden gap-1 menu bg-neutral-content lg:bg-transparent rounded-box drop-shadow-xl lg:menu-horizontal mt-10 sm:mt-14 lg:mt-0 right-3 lg:relative lg:inset-x-0 w-60 lg:w-full";
 const menuItemClass = compact
   ? "gap-3 md:gap-1 p-4 md:px-3 md:py-2.5 active:bg-base-300"
   : "gap-3 lg:gap-1 p-4 lg:px-3.5 lg:py-3 active:bg-base-300";
@@ -34,7 +34,7 @@ const menuItemClass = compact
           src="/logo.svg"
           width="484"
           height="83"
-          class="w-full"
+          class="w-full max-w-60 sm:max-w-96"
           style={`max-width: ${compact ? "240px" : "400px"};`}
         />
       </a>
@@ -44,7 +44,7 @@ const menuItemClass = compact
         <div class={compact ? "md:hidden" : "lg:hidden"}>
           <button
             id="menuOpen"
-            class="w-full tracking-wider btn btn-outline rounded-box"
+            class="w-[6.5rem] sm:w-auto tracking-wider btn btn-outline btn-sm sm:btn-md rounded-box px-3 sm:px-4 gap-2 sm:gap-3"
           >
             Menu
             <svg
@@ -63,7 +63,7 @@ const menuItemClass = compact
           </button>
           <button
             id="menuClose"
-            class="hidden w-full tracking-wider btn btn-outline rounded-box"
+            class="hidden w-[6.5rem] sm:w-auto tracking-wider btn btn-outline btn-sm sm:btn-md rounded-box px-3 sm:px-4 gap-2 sm:gap-3"
           >
             Close
             <svg

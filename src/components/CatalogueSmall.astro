@@ -12,9 +12,9 @@ const { url, image } = await generateCatalogueData(Astro.props);
   <a
     href={url}
     title={title}
-    class="transition-colors hover:text-neutral-focus"
+    class="flex gap-5 flex-row items-center sm:flex-col transition-colors hover:text-neutral-focus sm:max-w-96"
   >
-    <div class="flex justify-center max-h-96">
+    <div class="flex-shrink-0 self-start flex justify-center w-1/3 sm:w-auto">
       <figure class="flex justify-center">
         <img
           src={image}
@@ -23,9 +23,9 @@ const { url, image } = await generateCatalogueData(Astro.props);
         />
       </figure>
     </div>
-    <div class="my-4">
-      <h2 class="justify-center text-xl font-semibold" set:html={title} />
-      {description && <p>{description}</p>}
+    <div class="text-start">
+      <h2 class="justify-center text-lg sm:text-xl font-semibold text-balance" set:html={title} />
+      {description && <p class="text-pretty mt-1">{description}</p>}
     </div>
   </a>
 </div>

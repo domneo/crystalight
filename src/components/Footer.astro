@@ -13,17 +13,17 @@ const fax = "+65 6254 5313";
 const email = "enquiry@crystalight.com.sg";
 
 const wrapperClass = compact
-  ? "px-6 py-4 justify-center footer bg-base-content text-base-100"
-  : "px-10 py-6 footer bg-base-content text-base-100";
+  ? "px-6 py-4 gap-6 justify-center footer bg-base-content text-base-100"
+  : "px-10 py-6 gap-6 footer bg-base-content text-base-100";
 ---
 
 <footer class={wrapperClass}>
   <div class="items-center grid-flow-col gap-3">
     {!compact && <img src="/logo-icon-white.svg" width="40px" height="40px" />}
     <p>
-      <span class="inline-block">© {year} {company}.</span>
+      <span class="inline-block">© {year} {company}.&nbsp;</span>
       <span class="inline-block">All Rights Reserved.</span>
-      <span> •</span>
+      <span>&nbsp;•&nbsp;</span>
       <span class="inline-block">
         <a href="/disclaimer" title="Disclaimer" class="link text-base-300">
           Disclaimer
@@ -36,7 +36,7 @@ const wrapperClass = compact
       <div class="md:place-self-center md:justify-self-end">
         <div class="grid grid-flow-col gap-4">
           <p class="md:text-right">
-            <span class="inline-block">{address}</span>
+            <span class="inline-block text-balance">{address}</span>
             <br />
             <span class="inline-block">
               Tel:{" "}
@@ -48,9 +48,9 @@ const wrapperClass = compact
                 {telephone}
               </a>
             </span>
-            <span> •</span>
+            <span>&nbsp;•&nbsp;</span>
             <span class="inline-block">Fax: {fax}</span>
-            <span> •</span>
+            <span>&nbsp;•&nbsp;</span>
             <span class="inline-block">
               Email:{" "}
               <a href={`mailto:${email}`} title={email} class="rounded link">
