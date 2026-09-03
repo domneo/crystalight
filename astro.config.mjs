@@ -11,4 +11,11 @@ export default defineConfig({
       enabled: true,
     },
   }),
+  redirects: {
+    "/contact-information": "/contact",
+    "/flip-catalogue": "/catalogues/flip/calendars",
+    "/flip-catalogue-notebooks-gifts": "/catalogues/flip/diaries-gifts",
+    "/logo-imprinting-options-for-different-products": "/logo-imprints",
+    "/disclaimer-content-warning": "/disclaimer",
+  },
 });
