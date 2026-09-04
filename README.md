@@ -48,6 +48,7 @@ All commands are run from the root of the project:
 ```
 public/            Banners, icons, logos, and the vendored PDF.js viewer
 src/
+├── archive/       Archived pages
 ├── components/    Header, Footer, Hero carousel, catalogue cards
 ├── layouts/
 │   └── Layout.astro       Shared shell — meta tags, fonts, header/footer
@@ -55,7 +56,6 @@ src/
 │   ├── index.astro        Homepage: hero + main and small catalogues
 │   ├── about.astro
 │   ├── contact.astro      Contact details + Google Maps embed
-│   ├── logo-imprints.astro
 │   ├── disclaimer.astro
 │   └── catalogues/
 │       ├── pdf/[id].astro     PDF.js viewer, one route per PDF media ID

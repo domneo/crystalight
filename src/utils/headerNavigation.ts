@@ -6,12 +6,6 @@ export const getHeaderNavigation = (currentPage: string) => [
     isCurrent: currentPage === "home",
   },
   {
-    label: "Logo Imprints",
-    href: "/logo-imprints",
-    icon: "stamp",
-    isCurrent: currentPage === "logo-imprints",
-  },
-  {
     label: "Contact",
     href: "/contact",
     icon: "phone",
