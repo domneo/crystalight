@@ -20,17 +20,20 @@ const { images } = Astro.props;
 </div>
 
 <script>
-  setInterval(() => {
-    const imagesWrapper = document.querySelector(".hero-images");
-    const images = document.querySelectorAll(".hero-image");
-    images[0].classList.add("is-removing");
-    setTimeout(() => {
-      images[0].classList.remove("is-removing");
-    }, 300);
-    setTimeout(() => {
-      imagesWrapper?.insertAdjacentElement("beforeend", images[0]);
-    }, 150);
-  }, 3000);
+  const heroImages = document.querySelectorAll(".hero-image");
+  if (heroImages.length > 1) {
+    setInterval(() => {
+      const imagesWrapper = document.querySelector(".hero-images");
+      const images = document.querySelectorAll(".hero-image");
+      images[0].classList.add("is-removing");
+      setTimeout(() => {
+        images[0].classList.remove("is-removing");
+      }, 300);
+      setTimeout(() => {
+        imagesWrapper?.insertAdjacentElement("beforeend", images[0]);
+      }, 150);
+    }, 3000);
+  }
 </script>
 
 <style>
