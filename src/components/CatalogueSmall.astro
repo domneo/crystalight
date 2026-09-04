@@ -23,7 +23,7 @@ const { url, image } = await generateCatalogueData(Astro.props);
         />
       </figure>
     </div>
-    <div class="text-start">
+    <div class="text-start sm:text-center">
       <h2 class="justify-center text-lg sm:text-xl font-semibold text-balance" set:html={title} />
       {description && <p class="text-pretty mt-1">{description}</p>}
     </div>
