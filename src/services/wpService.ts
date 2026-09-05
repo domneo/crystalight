@@ -1,11 +1,6 @@
 const baseUrl = "https://www.crystalight.com.sg/wp-json/wp/v2";
 
 let headers = new Headers();
-headers.append(
-  "Authorization",
-  "Basic " +
-    btoa(import.meta.env.WP_USERNAME + ":" + import.meta.env.WP_PASSWORD),
-);
 
 export interface Catalogue {
   id: number;
