@@ -28,12 +28,6 @@ const keywords =
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{titleFull}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant:wght@500&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap"
-      rel="stylesheet"
-    />
   </head>
   <body>
     <div class="flex flex-col w-full h-screen">
@@ -48,6 +42,23 @@ const keywords =
 </html>
 
 <style is:global>
+  @font-face {
+    font-family: "Cormorant";
+    src: url("/fonts/Cormorant-VariableFont_wght.ttf")
+      format("truetype-variations");
+    font-weight: 300 700;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "DM Sans";
+    src: url("/fonts/DMSans-VariableFont_opsz,wght.ttf")
+      format("truetype-variations");
+    font-weight: 100 1000;
+    font-style: normal;
+    font-display: swap;
+  }
+
   ::selection {
     background-color: hsl(var(--a));
     color: hsl(var(--ac));
