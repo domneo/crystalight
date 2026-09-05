@@ -14,7 +14,7 @@ export default defineConfig({
   redirects: {
     "/contact-information": "/contact",
     "/flip-catalogue": "/catalogues/flip/calendars",
-    "/flip-catalogue-notebooks-gifts": "/catalogues/flip/diaries-gifts",
+    "/flip-catalogue-notebooks-gifts": "/catalogues/flip/notebooks-gifts",
     "/disclaimer-content-warning": "/disclaimer",
   },
 });
