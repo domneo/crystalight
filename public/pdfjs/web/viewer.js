@@ -1639,7 +1639,7 @@ exports.PDFViewerApplication = PDFViewerApplication;
         return;
       }
       const fileOrigin = new URL(file, window.location.href).origin;
-      if (fileOrigin !== viewerOrigin && fileOrigin !== "https://www.crystalight.com.sg") {
+      if (fileOrigin !== viewerOrigin && fileOrigin !== "https://admin.crystalight.com.sg") {
         throw new Error("file origin does not match viewer's");
       }
     } catch (ex) {
