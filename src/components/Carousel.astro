@@ -1,19 +1,30 @@
 ---
 const images = [
-  { src: "/test.png" },
-  { src: "/test.png" },
-  { src: "/test.png" },
-  { src: "/test.png" },
-  { src: "/test.png" },
-  { src: "/test.png" },
-  { src: "/test.png" },
-  { src: "/test.png" },
-  { src: "/test.png" },
-  { src: "/test.png" },
+  { src: "/carousel/about-1.png" },
+  { src: "/carousel/about-2.png" },
+  { src: "/carousel/about-3.png" },
+  { src: "/carousel/about-4.png" },
+  { src: "/carousel/about-5.png" },
+  { src: "/carousel/about-6.png" },
+  { src: "/carousel/about-7.png" },
+  { src: "/carousel/about-8.png" },
+  { src: "/carousel/about-9.png" },
+  { src: "/carousel/about-10.png" },
+  { src: "/carousel/about-11.png" },
+  { src: "/carousel/about-12.png" },
+  { src: "/carousel/about-13.png" },
+  { src: "/carousel/about-14.png" },
+  { src: "/carousel/about-15.png" },
+  { src: "/carousel/about-16.png" },
+  { src: "/carousel/about-17.png" },
+  { src: "/carousel/about-18.png" },
+  { src: "/carousel/about-19.png" },
+  { src: "/carousel/about-20.png" },
+  { src: "/carousel/about-21.png" },
 ];
 ---
 
-<div class="flex w-full overflow-hidden">
+<div class="flex w-full overflow-hidden mt-8 mb-12">
   <div class="flex images">
     {
       images.map((image) => (
@@ -45,11 +56,11 @@ const images = [
       translate: 0px;
     }
     to {
-      translate: calc(10 * -300px);
+      translate: calc(21 * -300px);
     }
   }
   .images {
-    animation: marquee 30s linear infinite;
+    animation: marquee 60s linear infinite;
   }
   .image {
     width: 160px;
@@ -57,7 +68,7 @@ const images = [
   }
   @media (min-width: 768px) {
     .images {
-      animation-duration: 25s;
+      animation-duration: 50s;
     }
     .image {
       width: 240px;
@@ -66,7 +77,7 @@ const images = [
   }
   @media (min-width: 1024px) {
     .images {
-      animation-duration: 20s;
+      animation-duration: 40s;
     }
     .image {
       width: 300px;
