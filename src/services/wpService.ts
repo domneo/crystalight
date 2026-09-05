@@ -1,4 +1,4 @@
-const baseUrl = "https://admin.crystalight.com.sg/wp-json/wp/v2";
+const baseUrl = "https://www.crystalight.com.sg/wp-json/wp/v2";
 
 let headers = new Headers();
 headers.append(

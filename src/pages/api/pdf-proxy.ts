@@ -2,7 +2,7 @@ import type { APIRoute } from "astro";
 
 export const prerender = false;
 
-const ALLOWED_HOST = "admin.crystalight.com.sg";
+const ALLOWED_HOST = "www.crystalight.com.sg";
 
 export const GET: APIRoute = async ({ request, url }) => {
   const target = url.searchParams.get("url");
