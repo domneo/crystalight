@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+import LogoIconColor from "../../public/logo-icon-color.svg";
 import Layout from "../layouts/Layout.astro";
 import Carousel from "../components/Carousel.astro";
 ---
@@ -6,9 +8,10 @@ import Carousel from "../components/Carousel.astro";
 <Layout currentPage="about">
   <div class="flex flex-col items-center justify-center h-full">
     <div class="fixed mt-56 ml-48 lg:mt-48 bg-logo lg:ml-80 -z-50 opacity-5">
-      <img
-        src="/logo-icon-color.svg"
+      <Image
+        src={LogoIconColor}
         alt="Crystalight Printcraft logo"
+        loading="eager"
         class="w-full"
       />
     </div>

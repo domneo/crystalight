@@ -1,4 +1,7 @@
 ---
+import { Image } from "astro:assets";
+import Logo from "../../public/logo.svg";
+
 interface NavItem {
   label: string;
   href: string;
@@ -30,10 +33,10 @@ const menuItemClass = compact
   <div class={wrapperClass}>
     <div class={logoWrapperClass}>
       <a href="/" title="Crystalight Printcraft" class="rounded-md link">
-        <img
-          src="/logo.svg"
-          width="484"
-          height="83"
+        <Image
+          src={Logo}
+          alt="Crystalight Printcraft"
+          loading="eager"
           class="w-full max-w-60 sm:max-w-96"
           style={`max-width: ${compact ? "240px" : "400px"};`}
         />
@@ -94,12 +97,14 @@ const menuItemClass = compact
                       : null
                   }`}
                 >
-                  <img
+                  <Image
                     src={`/icon-${nav.icon}-${
                       nav.isCurrent ? "light" : "dark"
                     }.svg`}
-                    width="20px"
-                    height="20px"
+                    alt=""
+                    width="20"
+                    height="20"
+                    loading="eager"
                   />
                   {nav.label}
                 </a>

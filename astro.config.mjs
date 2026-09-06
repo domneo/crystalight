@@ -17,4 +17,7 @@ export default defineConfig({
     "/flip-catalogue-notebooks-gifts": "/catalogues/flip/notebooks-gifts",
     "/disclaimer-content-warning": "/disclaimer",
   },
+  image: {
+    domains: ["admin.crystalight.com.sg"],
+  },
 });

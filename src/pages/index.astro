@@ -8,6 +8,7 @@ import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 import CatalogueMain from "../components/CatalogueMain.astro";
 import CatalogueSmall from "../components/CatalogueSmall.astro";
+import Banner7 from "../../public/hero/banner7.jpg";
 
 const mainCatalogues = await getMainCatalogues();
 const smallCatalogues = await getSmallCatalogues();
@@ -21,7 +22,7 @@ const catalogueCategories = await getCatalogueCategories();
     <Hero
       images={[
         {
-          src: "/hero/banner7.jpg",
+          src: Banner7,
           title:
             "Welcome to Crystalight Printcraft – Calendars, Diaries & Notebooks, Corporate Gifts, Apparel",
         },

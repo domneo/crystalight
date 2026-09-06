@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import type { CatalogueProps } from "../utils/generateCatalogueData";
 import { generateCatalogueData } from "../utils/generateCatalogueData";
 
@@ -17,7 +18,7 @@ const { url, image } = await generateCatalogueData(Astro.props);
     <figure
       class="overflow-hidden transition-all rounded-lg hover:-translate-y-2 hover:shadow-2xl hover:-rotate-1"
     >
-      <img src={image} alt={title} />
+      <Image src={image} alt={title} inferSize={true} loading="eager" />
     </figure>
     <h2
       class="mt-4 mb-2 text-4xl font-medium lg:mt-6 lg:mb-4 2xl:text-5xl font-display text-balance"

@@ -1,4 +1,7 @@
 ---
+import { Image } from "astro:assets";
+import LogoIconWhite from "../../public/logo-icon-white.svg";
+
 interface Props {
   compact?: boolean;
 }
@@ -18,7 +21,7 @@ const wrapperClass = compact
 
 <footer class={wrapperClass}>
   <div class="items-center grid-flow-col gap-3">
-    {!compact && <img src="/logo-icon-white.svg" width="40px" height="40px" />}
+    {!compact && <Image src={LogoIconWhite} alt="" width="40" height="40" />}
     <p>
       <span class="inline-block">© {year} {company}.&nbsp;</span>
       <span class="inline-block">All Rights Reserved.</span>

@@ -1,26 +1,49 @@
 ---
+import { Image } from "astro:assets";
+import About1 from "../../public/carousel/about-1.png";
+import About2 from "../../public/carousel/about-2.png";
+import About3 from "../../public/carousel/about-3.png";
+import About4 from "../../public/carousel/about-4.png";
+import About5 from "../../public/carousel/about-5.png";
+import About6 from "../../public/carousel/about-6.png";
+import About7 from "../../public/carousel/about-7.png";
+import About8 from "../../public/carousel/about-8.png";
+import About9 from "../../public/carousel/about-9.png";
+import About10 from "../../public/carousel/about-10.png";
+import About11 from "../../public/carousel/about-11.png";
+import About12 from "../../public/carousel/about-12.png";
+import About13 from "../../public/carousel/about-13.png";
+import About14 from "../../public/carousel/about-14.png";
+import About15 from "../../public/carousel/about-15.png";
+import About16 from "../../public/carousel/about-16.png";
+import About17 from "../../public/carousel/about-17.png";
+import About18 from "../../public/carousel/about-18.png";
+import About19 from "../../public/carousel/about-19.png";
+import About20 from "../../public/carousel/about-20.png";
+import About21 from "../../public/carousel/about-21.png";
+
 const images = [
-  { src: "/carousel/about-1.png" },
-  { src: "/carousel/about-2.png" },
-  { src: "/carousel/about-3.png" },
-  { src: "/carousel/about-4.png" },
-  { src: "/carousel/about-5.png" },
-  { src: "/carousel/about-6.png" },
-  { src: "/carousel/about-7.png" },
-  { src: "/carousel/about-8.png" },
-  { src: "/carousel/about-9.png" },
-  { src: "/carousel/about-10.png" },
-  { src: "/carousel/about-11.png" },
-  { src: "/carousel/about-12.png" },
-  { src: "/carousel/about-13.png" },
-  { src: "/carousel/about-14.png" },
-  { src: "/carousel/about-15.png" },
-  { src: "/carousel/about-16.png" },
-  { src: "/carousel/about-17.png" },
-  { src: "/carousel/about-18.png" },
-  { src: "/carousel/about-19.png" },
-  { src: "/carousel/about-20.png" },
-  { src: "/carousel/about-21.png" },
+  { src: About1 },
+  { src: About2 },
+  { src: About3 },
+  { src: About4 },
+  { src: About5 },
+  { src: About6 },
+  { src: About7 },
+  { src: About8 },
+  { src: About9 },
+  { src: About10 },
+  { src: About11 },
+  { src: About12 },
+  { src: About13 },
+  { src: About14 },
+  { src: About15 },
+  { src: About16 },
+  { src: About17 },
+  { src: About18 },
+  { src: About19 },
+  { src: About20 },
+  { src: About21 },
 ];
 ---
 
@@ -29,21 +52,21 @@ const images = [
     {
       images.map((image) => (
         <div class="image">
-          <img src={image.src} class="w-full" />
+          <Image src={image.src} alt="" loading="eager" class="w-full" />
         </div>
       ))
     }
     {
       images.map((image) => (
         <div class="image">
-          <img src={image.src} class="w-full" />
+          <Image src={image.src} alt="" loading="eager" class="w-full" />
         </div>
       ))
     }
     {
       images.map((image) => (
         <div class="image">
-          <img src={image.src} class="w-full" />
+          <Image src={image.src} alt="" loading="eager" class="w-full" />
         </div>
       ))
     }

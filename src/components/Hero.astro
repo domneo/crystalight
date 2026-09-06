@@ -1,6 +1,9 @@
 ---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+
 interface HeroImage {
-  src: string;
+  src: ImageMetadata;
   title: string;
 }
 interface Props {
@@ -13,7 +16,12 @@ const { images } = Astro.props;
   {
     images.map((image) => (
       <figure class="flex overflow-hidden transition-all duration-300 shadow-xl rounded-2xl bg-base-100 hero-image">
-        <img src={image.src} alt={image.title} class="object-cover w-full" />
+        <Image
+          src={image.src}
+          alt={image.title}
+          loading="eager"
+          class="object-cover w-full"
+        />
       </figure>
     ))
   }
